@@ -32,9 +32,9 @@ public class ContactImpl implements ContactInterface{
 	}
 
 	@Override
-	public void remove(int id_post) {
+	public void remove(int id) {
 		Session session=sessionFactory.getCurrentSession();
-		Contact contact=(Contact) session.load(Contact.class,new Integer(id_post));
+		Contact contact=(Contact) session.load(Contact.class,new Integer(id));
 		if(contact!=null){
 			session.delete(contact);
 		}
@@ -51,6 +51,12 @@ public class ContactImpl implements ContactInterface{
 	public List<Contact> getNextListContact(int last_contact_id) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public Contact getContactById(int id) {
+		Session session=sessionFactory.getCurrentSession();
+		return (Contact) session.load(Contact.class,new Integer(id));
 	}
 	
 }

@@ -1,11 +1,10 @@
-package com.shop.dao;
+package com.shop.service;
 
 import java.util.List;
 
-
 import com.shop.model.Contact;
 
-public interface ContactInterface {
+public interface ContactService {
 	public void add(Contact contact);
 	public void edit(Contact contact);
 	public void remove(int id);
