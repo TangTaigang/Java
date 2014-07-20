@@ -16,9 +16,9 @@ public class ContactImpl implements ContactInterface{
 	
 	private static final Logger logger = LoggerFactory.getLogger(ContactImpl.class);
 	
-	@Autowired
+//	@Autowired
 	private SessionFactory sessionFactory;
-	
+
 	@Override
 	public void add(Contact contact) {
 		sessionFactory.getCurrentSession().saveOrUpdate(contact);

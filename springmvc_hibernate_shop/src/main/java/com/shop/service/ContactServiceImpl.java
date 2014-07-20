@@ -3,12 +3,15 @@ package com.shop.service;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
 import com.shop.model.Contact;
 
 @Service
 public class ContactServiceImpl implements ContactService{
 
 	@Override
+	@Transactional
 	public void add(Contact contact) {
 		// TODO Auto-generated method stub
 		
