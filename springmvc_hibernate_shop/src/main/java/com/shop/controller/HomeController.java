@@ -24,6 +24,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.shop.model.Contact;
 import com.shop.model.FileUploadBean;
+import com.shop.service.ContactService;
 
 
 /**
@@ -32,15 +33,8 @@ import com.shop.model.FileUploadBean;
 @Controller
 public class HomeController {
 	
-
-//	@Autowired
-//	BlogInterface blogInterface;
-//	
-//	@Autowired
-//	UserInterface userInterface;
-	
-//	@Autowired
-//	ContactInterface contactInterface;
+	@Autowired
+	ContactService contactService;
 	
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(Model model) {
@@ -107,6 +101,7 @@ public class HomeController {
 			System.out.println(contact.getEmail());
 			System.out.println(contact.getContact_subject());
 			System.out.println(contact.getUser_message());
+			contactService.add(contact);
 		}
 		List<String> contact_subject=Arrays.asList("Delivery question","Shipping cost","Warranty","Money back");
 		model.addAttribute("contact_subject",contact_subject);
