@@ -5,15 +5,23 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.shop.dao.ContactDAO;
 import com.shop.model.Contact;
 
 @Service
 public class ContactServiceImpl implements ContactService{
+	
+	private ContactDAO contactDAO;
+	
+	
+	public void setContactDAO(ContactDAO contactDAO) {
+		this.contactDAO = contactDAO;
+	}
 
 	@Override
 	@Transactional
 	public void add(Contact contact) {
-		// TODO Auto-generated method stub
+		this.contactDAO.add(contact);
 		
 	}
 

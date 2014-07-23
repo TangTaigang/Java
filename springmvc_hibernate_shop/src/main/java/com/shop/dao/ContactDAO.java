@@ -5,7 +5,7 @@ import java.util.List;
 
 import com.shop.model.Contact;
 
-public interface ContactInterface {
+public interface ContactDAO {
 	public void add(Contact contact);
 	public void edit(Contact contact);
 	public void remove(int id);

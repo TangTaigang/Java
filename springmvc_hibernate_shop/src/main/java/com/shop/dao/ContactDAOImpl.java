@@ -12,13 +12,16 @@ import org.springframework.stereotype.Repository;
 import com.shop.model.Contact;
 
 @Repository
-public class ContactImpl implements ContactInterface{
+public class ContactDAOImpl implements ContactDAO{
 	
-	private static final Logger logger = LoggerFactory.getLogger(ContactImpl.class);
+	private static final Logger logger = LoggerFactory.getLogger(ContactDAOImpl.class);
 	
-//	@Autowired
+	@Autowired
 	private SessionFactory sessionFactory;
-
+	
+	public void setSessionFactory(SessionFactory sf){
+        this.sessionFactory = sf;
+    }
 	@Override
 	public void add(Contact contact) {
 		sessionFactory.getCurrentSession().saveOrUpdate(contact);
