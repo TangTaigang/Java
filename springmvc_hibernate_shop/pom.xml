@@ -38,6 +38,12 @@
             <artifactId>spring-tx</artifactId>
             <version>${org.springframework-version}</version>
         </dependency>
+        <dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-jdbc</artifactId>
+			<version>${org.springframework-version}</version>
+		</dependency>
+        
 		    <!-- Hibernate -->
         <dependency>
             <groupId>org.hibernate</groupId>
@@ -56,10 +62,10 @@
             <version>1.4</version>
         </dependency>
         <dependency>
-	<groupId>mysql</groupId>
-	<artifactId>mysql-connector-java</artifactId>
-	<version>5.1.6</version>
-</dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<version>5.1.6</version>
+		</dependency>
         <!-- Spring ORM -->
         <dependency>
             <groupId>org.springframework</groupId>
