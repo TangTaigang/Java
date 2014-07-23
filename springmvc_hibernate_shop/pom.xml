@@ -56,11 +56,16 @@
             <version>${hibernate.version}</version>
         </dependency>	
           <!-- Apache Commons DBCP -->
-        <dependency>
+         <!-- <dependency>
             <groupId>commons-dbcp</groupId>
             <artifactId>commons-dbcp</artifactId>
             <version>1.4</version>
         </dependency>
+       <dependency>
+		    <groupId>org.apache.tomcat</groupId>
+		    <artifactId>tomcat-dbcp</artifactId>
+		    <version>7.0.52</version>
+		</dependency>-->
         <dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
