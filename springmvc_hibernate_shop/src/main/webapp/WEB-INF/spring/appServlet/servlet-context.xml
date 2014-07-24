@@ -26,16 +26,10 @@
     </beans:bean>
 	 <beans:bean class="org.springframework.jdbc.datasource.DriverManagerDataSource" id="dataSource">  
 		 <beans:property name="driverClassName" value="com.mysql.jdbc.Driver"/> 
-		 <beans:property name="url" value="jdbc:mysql://192.168.1.21:3306/SpringDB"/> 
+		 <beans:property name="url" value="jdbc:mysql://localhost:3306/SpringDB"/> 
 		 <beans:property name="username" value="root"/>
 		 <beans:property name="password" value="root"/> 
 	 </beans:bean>
-  <!--	<beans:bean  id="dataSource" class="org.apache.tomcat.dbcp.dbcp.BasicDataSource">
-      <beans:property name="driverClassName" value="com.mysql.jdbc.Driver" />
-      <beans:property name="url" value="${jdbc.url}" />
-      <beans:property name="username" value="${jdbc.user}" />
-      <beans:property name="password" value="${jdbc.pass}" />
-  	</beans:bean>-->
     <!-- Hibernate 4 SessionFactory Bean definition -->
     <beans:bean id="hibernate4AnnotatedSessionFactory" class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
         <beans:property name="dataSource" ref="dataSource" />
@@ -49,6 +43,7 @@
                 <beans:prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect
                 </beans:prop>
                 <beans:prop key="hibernate.show_sql">true</beans:prop>
+                <beans:prop key="hibernate.hbm2ddl.auto">create</beans:prop>      
             </beans:props>
         </beans:property>
     </beans:bean>
