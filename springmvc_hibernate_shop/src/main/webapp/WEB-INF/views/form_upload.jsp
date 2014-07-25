@@ -9,7 +9,7 @@
 <title>Upload Files</title>
 </head>
 <body>
-<form:form method="post" modelAttribute="file_upload_bean" enctype="multipart/form-data">
+<form:form method="post" modelAttribute="file_upload_bean" enctype="multipart/form-data" >
 	<form:input type="file" path="files" multiple="true" ></form:input>
 	<input type="submit" value="Submit">
 </form:form>

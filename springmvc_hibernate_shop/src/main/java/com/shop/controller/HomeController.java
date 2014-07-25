@@ -114,13 +114,14 @@ public class HomeController {
 		return "form_upload";
 	}
 	@SuppressWarnings("resource")
-	@RequestMapping(value = "/upload", method = RequestMethod.POST)
+	@RequestMapping(value="/upload",method = RequestMethod.POST)
 	public String upload_file(@ModelAttribute("file_upload_bean") FileUploadBean fBean,BindingResult result,HttpServletRequest request) throws IOException,FileNotFoundException{
 		List<MultipartFile> files=fBean.getFiles();
 		InputStream inputStream=null;
 		OutputStream outputStream=null;
 		if(files!=null && files.size()>0){
 			for (MultipartFile multipartFile : files) {
+				System.out.println(multipartFile.getOriginalFilename());
 				inputStream = multipartFile.getInputStream();
 				 String rootPath = System.getProperty("catalina.home");
 	                File dir = new File(rootPath + File.separator + "tmpFiles");
