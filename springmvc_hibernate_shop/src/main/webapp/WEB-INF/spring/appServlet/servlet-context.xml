@@ -24,9 +24,14 @@
         <beans:property name="prefix" value="/WEB-INF/views/" />
         <beans:property name="suffix" value=".jsp" />
     </beans:bean>
+    
+    <context:component-scan base-package="com.shop.controller" />
+     
+    <tx:annotation-driven transaction-manager="transactionManager"/>
+    
 	 <beans:bean class="org.springframework.jdbc.datasource.DriverManagerDataSource" id="dataSource">  
 		 <beans:property name="driverClassName" value="com.mysql.jdbc.Driver"/> 
-		 <beans:property name="url" value="jdbc:mysql://localhost:3306/SpringDB"/> 
+		 <beans:property name="url" value="jdbc:mysql://192.168.1.20:3306/SpringDB"/> 
 		 <beans:property name="username" value="root"/>
 		 <beans:property name="password" value="root"/> 
 	 </beans:bean>
@@ -54,9 +59,7 @@
     <beans:bean id="contactService" class="com.shop.service.ContactServiceImpl">
         <beans:property name="contactDAO" ref="contactDAO"></beans:property>
     </beans:bean>
-    <context:component-scan base-package="com.shop.controller" />
-     
-    <tx:annotation-driven transaction-manager="transactionManager"/>
+   
      
     <beans:bean id="transactionManager" class="org.springframework.orm.hibernate4.HibernateTransactionManager">
         <beans:property name="sessionFactory" ref="hibernate4AnnotatedSessionFactory" />
