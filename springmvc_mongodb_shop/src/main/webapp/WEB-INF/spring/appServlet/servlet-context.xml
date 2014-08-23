@@ -27,7 +27,7 @@
 	<context:component-scan base-package="com.shopmongo.control" />
 	
 	<beans:bean id="mongoDbFactory" class="org.springframework.data.mongodb.core.MongoFactoryBean">
-		<beans:property name="host" value="localhost"/>
+		<beans:property name="host" value="192.128.1.21"/>
 	</beans:bean>
 	
 	<beans:bean id="mongoCredentials" class="org.springframework.data.authentication.UserCredentials">
