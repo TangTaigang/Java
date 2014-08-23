@@ -38,7 +38,7 @@
 	<beans:bean id="mongoTemplate" class="org.springframework.data.mongodb.core.MongoTemplate">
 		<beans:constructor-arg name="mongo" ref="mongoDbFactory" />
 		<beans:constructor-arg name="databaseName" value="shopstore"/>
-		<beans:constructor-arg name="userCredentials" ref="mongoCredentials"/>
+		<!-- <beans:constructor-arg name="userCredentials" ref="mongoCredentials"/>-->
 	</beans:bean>
 	
 	
