@@ -26,7 +26,7 @@ public class HomeController {
 		model.addAttribute("user",user);
 		return "index";
 	}
-	@RequestMapping(value = "/user/add", method = RequestMethod.POST)
+	@RequestMapping(value = "/", method = RequestMethod.POST)
 	public String createUser(@ModelAttribute User user,Model model) {
 		userService.createUser(user);
 		return "index";

@@ -27,7 +27,8 @@
 	<context:component-scan base-package="com.shopmongo.control" />
 	
 	<beans:bean id="mongoDbFactory" class="org.springframework.data.mongodb.core.MongoFactoryBean">
-		<beans:property name="host" value="192.128.1.21"/>
+		<beans:property name="host" value="192.128.1.20"/>
+		<beans:property name="port" value="27017"/>
 	</beans:bean>
 	
 	<beans:bean id="mongoCredentials" class="org.springframework.data.authentication.UserCredentials">
@@ -38,7 +39,6 @@
 	<beans:bean id="mongoTemplate" class="org.springframework.data.mongodb.core.MongoTemplate">
 		<beans:constructor-arg name="mongo" ref="mongoDbFactory" />
 		<beans:constructor-arg name="databaseName" value="shopstore"/>
-		<!-- <beans:constructor-arg name="userCredentials" ref="mongoCredentials"/>-->
 	</beans:bean>
 	
 	<beans:bean id="userService" class="com.shopmongo.service.UserServiceImpl">

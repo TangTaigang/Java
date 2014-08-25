@@ -62,7 +62,7 @@
         <beans:property name="sessionFactory" ref="hibernate4AnnotatedSessionFactory" />
     </beans:bean>
     <beans:bean id="contactService" class="com.shop.service.ContactServiceImpl">
-        <beans:property name="contactDAO" ref="contactDAO"></beans:property>
+        <beans:property name="contactDAO" ref="contactDAO"/>
     </beans:bean>
    
      

@@ -1,7 +1,6 @@
 package com.shopmongo.service;
 
 import java.math.BigInteger;
-import java.util.UUID;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -19,26 +18,21 @@ public class UserServiceImpl implements UserService{
 		this.mongoTemplate = mongoTemplate;
 	}
 
-	private static final String UserCollection="UserCollection";
 	private static final Logger logger = LoggerFactory.getLogger(UserServiceImpl.class);
 	
-	@Override
 	public void createUser(User user) {
 		if(!mongoTemplate.collectionExists(User.class)){
 			mongoTemplate.createCollection(User.class);
 		}
-		user.setId(UUID.randomUUID().toString());
-		mongoTemplate.insert(user,UserCollection);
+		mongoTemplate.insert(user);
 		logger.info("Save user successfully, Details : "+user);
 	}
-
-	@Override
+	
 	public void updateUser(User user) {
 		// TODO Auto-generated method stub
 		
 	}
 
-	@Override
 	public void removeUser(BigInteger id) {
 		// TODO Auto-generated method stub
 		

@@ -9,10 +9,10 @@
 <title>Test page </title>
 </head>
 <body>
-		<form:form modelAttribute="user">
+		<form:form modelAttribute="user" >
 		<form:input path="name"/>
 		<form:input path="password"/>
-			
+		<input type="submit" >
 		</form:form>	
 </body>
 </html>
