@@ -22,11 +22,13 @@ public class HomeController {
 	
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(Model model) {
-		return "index.jsp";
+		User user=new User();
+		model.addAttribute("user",user);
+		return "index";
 	}
 	@RequestMapping(value = "/user/add", method = RequestMethod.POST)
 	public String createUser(@ModelAttribute User user,Model model) {
 		userService.createUser(user);
-		return "index.jsp";
+		return "index";
 	}
 }

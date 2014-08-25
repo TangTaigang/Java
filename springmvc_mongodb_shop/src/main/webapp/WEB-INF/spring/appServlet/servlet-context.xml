@@ -41,6 +41,9 @@
 		<!-- <beans:constructor-arg name="userCredentials" ref="mongoCredentials"/>-->
 	</beans:bean>
 	
+	<beans:bean id="userService" class="com.shopmongo.service.UserServiceImpl">
+		<beans:property name="mongoTemplate" ref="mongoTemplate"></beans:property>
+	</beans:bean>
 	
 	
 </beans:beans>
