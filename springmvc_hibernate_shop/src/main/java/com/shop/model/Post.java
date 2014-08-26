@@ -1,10 +1,10 @@
 package com.shop.model;
 
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.Set;
-
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
@@ -12,18 +12,18 @@ import javax.persistence.Table;
 @Table(name="Post")
 public class Post {
 	@Id
-	private String id_post;
+	@Column(name="id_post")
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	private int id_post;
 	private String title;
 	private Date published;
-	private Set<String> categories;
+	private int categories;
 	private String content;
 	private String img_url;
-	private ArrayList<String> comment_parent;
-	private ArrayList<String> comment_child;
-	public String getId_post() {
+	public int getId_post() {
 		return id_post;
 	}
-	public void setId_post(String id_post) {
+	public void setId_post(int id_post) {
 		this.id_post = id_post;
 	}
 	public String getTitle() {
@@ -44,10 +44,10 @@ public class Post {
 	public void setPublished(Date published) {
 		this.published = published;
 	}
-	public Set<String> getCategories() {
+	public int getCategories() {
 		return categories;
 	}
-	public void setCategories(Set<String> categories) {
+	public void setCategories(int categories) {
 		this.categories = categories;
 	}
 	public String getContent() {
@@ -61,18 +61,6 @@ public class Post {
 	}
 	public void setImg_url(String img_url) {
 		this.img_url = img_url;
-	}
-	public ArrayList<String> getComment_parent() {
-		return comment_parent;
-	}
-	public void setComment_parent(ArrayList<String> comment_parent) {
-		this.comment_parent = comment_parent;
-	}
-	public ArrayList<String> getComment_child() {
-		return comment_child;
-	}
-	public void setComment_child(ArrayList<String> comment_child) {
-		this.comment_child = comment_child;
 	}
 	
 }
