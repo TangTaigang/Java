@@ -14,10 +14,12 @@ public class UserServiceImpl implements UserService{
 	@Autowired
 	private MongoTemplate mongoTemplate;
 	
-	public void setMongoTemplate(MongoTemplate mongoTemplate) {
-		this.mongoTemplate = mongoTemplate;
+//	public void setMongoTemplate(MongoTemplate mongoTemplate) {
+//		this.mongoTemplate = mongoTemplate;
+//	}
+	public UserServiceImpl(MongoTemplate mongoTemplate){
+		this.mongoTemplate=mongoTemplate;
 	}
-
 	private static final Logger logger = LoggerFactory.getLogger(UserServiceImpl.class);
 	
 	public void createUser(User user) {
