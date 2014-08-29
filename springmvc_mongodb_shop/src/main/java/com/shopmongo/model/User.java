@@ -71,6 +71,14 @@ public class User {
 	public void setAccessUrl(String accessUrl) {
 		this.accessUrl = accessUrl;
 	}
+
+	@Override
+	public String toString() {
+		return "User [id=" + id + ", name=" + name + ", password=" + password
+				+ ", activityTime=" + activityTime + ", activityType="
+				+ activityType + ", activityDescription=" + activityDescription
+				+ ", accessUrl=" + accessUrl + "]";
+	}
 	
-		
+	
 }
