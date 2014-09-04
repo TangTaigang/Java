@@ -17,9 +17,9 @@ public class AppTest {
 		UserServiceImpl userServiceImpl= (UserServiceImpl) context.getBean("userService");
 		
 		// Create user
-		User user=new User();
-		user.setName("admin");
-		user.setPassword("123456");
+//		User user=new User();
+//		user.setName("admin");
+//		user.setPassword("123456");
 //		userServiceImpl.createUser(user);
 		
 		
@@ -39,8 +39,8 @@ public class AppTest {
 			System.out.println(entry.toString());
 		}
 		
-		// Login
-		System.out.println(userServiceImpl.checkLoggin("admin", "123456"));
+//		// Login
+//		System.out.println(userServiceImpl.checkLoggin("admin", "123456"));
 	}
 
 }
