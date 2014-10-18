@@ -24,7 +24,7 @@
             android:textSize="16dp"
             android:paddingLeft="10dp"
             android:textStyle="bold"
-            android:text="The Good, The Bad And The Ugly"
+            android:text="Hello"
             android:layout_marginTop="10dp"/>"
         
         <!-- Playlist button -->

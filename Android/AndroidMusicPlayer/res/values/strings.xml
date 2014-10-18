@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="hello">AndroidMusicPlayer!</string>
-    <string name="app_name">AndroidMusicPlayer</string>
+    <string name="hello">MusicPlayer</string>
+    <string name="app_name">MusicPlayer</string>
 
 </resources>
