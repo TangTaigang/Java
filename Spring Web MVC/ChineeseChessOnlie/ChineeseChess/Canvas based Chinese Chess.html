@@ -1,0 +1,35 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="zh-CN">
+    
+    <head>
+        <title>Chinese Chess</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <link rel="stylesheet" type="text/css" href="Style.css">
+        <script src="Chess.js"></script>
+        <script src="Board.js"></script>
+
+    </head>
+    
+    <body>
+        <div id="main">
+            <div id="debug" style="float:left;display:none"></div>
+            <div style="float:left">
+                <canvas id="board" width="460" height="510" ></canvas>
+            </div>
+            <div style="float:right">
+                <div id="newGame" class="button" >New Game</div>
+                <div id="restore" class="button" >Turn back</div>
+                <div class="info" >Time：<span id="TimeCost">0</span></div>
+                <div class="info" >Depth：<span id="depth">0</span></div>
+            </div>
+        </div>
+        <div id="debug" style="position:absolut;top:0px;left:0px;width:400px;"></div>
+        <script type='text/javascript'>
+            var chessGame=new ChessGame("board");
+            chessGame.init();
+            document.getElementById("newGame").onclick=function(){chessGame.init()};
+            document.getElementById("restore").onclick=function(){chessGame.restore()};
+        </script>
+    </body>
+
+</html>
