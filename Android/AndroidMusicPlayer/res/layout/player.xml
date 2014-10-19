@@ -8,7 +8,7 @@
     <LinearLayout 
         android:id="@+id/player_header_bg"
         android:layout_width="fill_parent"
-        android:layout_height="60dip"
+        android:layout_height="80dip"
         android:background="@layout/bg_player_header"
         android:layout_alignParentTop="true"
         android:paddingLeft="5dp"
@@ -45,9 +45,12 @@
         android:paddingBottom="10dp"
         android:gravity="center"
         android:layout_below="@id/player_header_bg">
-    	<ImageView android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/adele"/>    
+
+    	<ImageView
+    	    android:layout_width="match_parent"
+    	    android:layout_height="250dp"
+    	    android:src="@drawable/adele" />
+    
     </LinearLayout>
     
     <!-- Player Footer -->
