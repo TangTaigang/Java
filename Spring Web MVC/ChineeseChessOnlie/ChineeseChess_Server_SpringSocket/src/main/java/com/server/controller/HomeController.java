@@ -17,9 +17,15 @@ public class HomeController {
 //	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
 	
 	@RequestMapping(value = "/", method = RequestMethod.GET)
+	public String home(Model model) {
+		model.addAttribute("location","index");
+		return "index";
+	}
+	@RequestMapping(value = "/login", method = RequestMethod.GET)
 	public String test(Model model) {
 		model.addAttribute("location","test");
 		return "test";
 	}
+	
 	
 }
