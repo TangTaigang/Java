@@ -39,8 +39,8 @@ public class AndroidMusicPlayer extends Activity implements OnCompletionListener
 	private Handler mHandler = new Handler();;
 	private SongsManager songManager;
 	private Utilities utils;
-	private int seekForwardTime = 5000; // 5000 milliseconds
-	private int seekBackwardTime = 5000; // 5000 milliseconds
+	private int seekForwardTime = 5000;  // 5 seconds
+	private int seekBackwardTime = 5000; // 5 seconds
 	private int currentSongIndex = 0; 
 	private boolean isShuffle = false;
 	private boolean isRepeat = false;
@@ -53,18 +53,18 @@ public class AndroidMusicPlayer extends Activity implements OnCompletionListener
 		setContentView(R.layout.player);
 		
 		// All player buttons
-		btnPlay = (ImageButton) findViewById(R.id.btnPlay);
-		btnForward = (ImageButton) findViewById(R.id.btnForward);
+		btnPlay     = (ImageButton) findViewById(R.id.btnPlay);
+		btnForward  = (ImageButton) findViewById(R.id.btnForward);
 		btnBackward = (ImageButton) findViewById(R.id.btnBackward);
-		btnNext = (ImageButton) findViewById(R.id.btnNext);
+		btnNext     = (ImageButton) findViewById(R.id.btnNext);
 		btnPrevious = (ImageButton) findViewById(R.id.btnPrevious);
 		btnPlaylist = (ImageButton) findViewById(R.id.btnPlaylist);
-		btnRepeat = (ImageButton) findViewById(R.id.btnRepeat);
-		btnShuffle = (ImageButton) findViewById(R.id.btnShuffle);
+		btnRepeat   = (ImageButton) findViewById(R.id.btnRepeat);
+		btnShuffle  = (ImageButton) findViewById(R.id.btnShuffle);
 		songProgressBar = (SeekBar) findViewById(R.id.songProgressBar);
-		songTitleLabel = (TextView) findViewById(R.id.songTitle);
+		songTitleLabel  = (TextView) findViewById(R.id.songTitle);
 		songCurrentDurationLabel = (TextView) findViewById(R.id.songCurrentDurationLabel);
-		songTotalDurationLabel = (TextView) findViewById(R.id.songTotalDurationLabel);
+		songTotalDurationLabel   = (TextView) findViewById(R.id.songTotalDurationLabel);
 		
 		// Mediaplayer
 		mp = new MediaPlayer();
@@ -87,25 +87,23 @@ public class AndroidMusicPlayer extends Activity implements OnCompletionListener
 		 * pauses a song and changes button to play image
 		 * */
 		btnPlay.setOnClickListener(new View.OnClickListener() {
-			
 			@Override
 			public void onClick(View arg0) {
 				// check for already playing
 				if(mp.isPlaying()){
 					if(mp!=null){
 						mp.pause();
-						// Changing button image to play button
+						Toast.makeText(getApplicationContext(), "Pause", Toast.LENGTH_SHORT).show();
 						btnPlay.setImageResource(R.drawable.btn_play);
 					}
 				}else{
 					// Resume song
 					if(mp!=null){
 						mp.start();
-						// Changing button image to pause button
+						Toast.makeText(getApplicationContext(), "Resume", Toast.LENGTH_SHORT).show();
 						btnPlay.setImageResource(R.drawable.btn_pause);
 					}
 				}
-				
 			}
 		});
 		
