@@ -78,7 +78,7 @@ public class AndroidMusicPlayer extends Activity implements OnCompletionListener
 		// Getting all songs list
 		songsList = songManager.getPlayList();
 		
-		// By default play first song
+		// Default play first song
 		playSong(0);
 				
 		/**
@@ -112,7 +112,6 @@ public class AndroidMusicPlayer extends Activity implements OnCompletionListener
 		 * Forwards song specified seconds
 		 * */
 		btnForward.setOnClickListener(new View.OnClickListener() {
-			
 			@Override
 			public void onClick(View arg0) {
 				// get current song position				
@@ -133,7 +132,6 @@ public class AndroidMusicPlayer extends Activity implements OnCompletionListener
 		 * Backward song to specified seconds
 		 * */
 		btnBackward.setOnClickListener(new View.OnClickListener() {
-			
 			@Override
 			public void onClick(View arg0) {
 				// get current song position				
@@ -155,7 +153,6 @@ public class AndroidMusicPlayer extends Activity implements OnCompletionListener
 		 * Plays next song by taking currentSongIndex + 1
 		 * */
 		btnNext.setOnClickListener(new View.OnClickListener() {
-			
 			@Override
 			public void onClick(View arg0) {
 				// check if next song is there or not
