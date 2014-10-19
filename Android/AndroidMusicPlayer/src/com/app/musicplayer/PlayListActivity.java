@@ -42,7 +42,6 @@ public class PlayListActivity extends ListActivity {
 												new String[] { "songTitle" }, 
 												new int[] {	R.id.songTitle });
 		setListAdapter(adapter);
-
 		// selecting single ListView item
 		ListView lv = getListView();
 		// listening to single listitem click

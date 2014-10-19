@@ -259,23 +259,19 @@ public class AndroidMusicPlayer extends Activity implements OnCompletionListener
 	 * and play the song
 	 * */
 	@Override
-    protected void onActivityResult(int requestCode,
-                                     int resultCode, Intent data) {
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if(resultCode == 100){
          	 currentSongIndex = data.getExtras().getInt("songIndex");
-         	 // play selected song
              playSong(currentSongIndex);
         }
- 
     }
 	
 	/**
 	 * Function to play a song
-	 * @param songIndex - index of song
+	 * @param songIndex
 	 * */
-	public void  playSong(int songIndex){
-		// Play song
+	public void playSong(int songIndex){
 		try {
         	mp.reset();
 			mp.setDataSource(songsList.get(songIndex).get("songPath"));
@@ -317,17 +313,14 @@ public class AndroidMusicPlayer extends Activity implements OnCompletionListener
 		   public void run() {
 			   long totalDuration = mp.getDuration();
 			   long currentDuration = mp.getCurrentPosition();
-			  
 			   // Displaying Total Duration time
 			   songTotalDurationLabel.setText(""+utils.milliSecondsToTimer(totalDuration));
 			   // Displaying time completed playing
 			   songCurrentDurationLabel.setText(""+utils.milliSecondsToTimer(currentDuration));
-			   
 			   // Updating progress bar
 			   int progress = (int)(utils.getProgressPercentage(currentDuration, totalDuration));
 			   //Log.d("Progress", ""+progress);
 			   songProgressBar.setProgress(progress);
-			   
 			   // Running this thread after 100 milliseconds
 		       mHandler.postDelayed(this, 100);
 		   }
@@ -337,16 +330,13 @@ public class AndroidMusicPlayer extends Activity implements OnCompletionListener
 	 * 
 	 * */
 	@Override
-	public void onProgressChanged(SeekBar seekBar, int progress, boolean fromTouch) {
-		
-	}
+	public void onProgressChanged(SeekBar seekBar, int progress, boolean fromTouch) {	}
 
 	/**
 	 * When user starts moving the progress handler
 	 * */
 	@Override
 	public void onStartTrackingTouch(SeekBar seekBar) {
-		// remove message Handler from updating progress bar
 		mHandler.removeCallbacks(mUpdateTimeTask);
     }
 	
@@ -358,10 +348,8 @@ public class AndroidMusicPlayer extends Activity implements OnCompletionListener
 		mHandler.removeCallbacks(mUpdateTimeTask);
 		int totalDuration = mp.getDuration();
 		int currentPosition = utils.progressToTimer(seekBar.getProgress(), totalDuration);
-		
 		// forward or backward to certain seconds
 		mp.seekTo(currentPosition);
-		
 		// update timer progress again
 		updateProgressBar();
     }
@@ -373,10 +361,9 @@ public class AndroidMusicPlayer extends Activity implements OnCompletionListener
 	 * */
 	@Override
 	public void onCompletion(MediaPlayer arg0) {
-		
 		// check for repeat is ON or OFF
 		if(isRepeat){
-			// repeat is on play same song again
+			// if repeat is on then play same song again.
 			playSong(currentSongIndex);
 		} else if(isShuffle){
 			// shuffle is on - play a random song
@@ -384,12 +371,12 @@ public class AndroidMusicPlayer extends Activity implements OnCompletionListener
 			currentSongIndex = rand.nextInt((songsList.size() - 1) - 0 + 1) + 0;
 			playSong(currentSongIndex);
 		} else{
-			// no repeat or shuffle ON - play next song
+			// if no repeat or shuffle ON - play next song
 			if(currentSongIndex < (songsList.size() - 1)){
 				playSong(currentSongIndex + 1);
 				currentSongIndex = currentSongIndex + 1;
 			}else{
-				// play first song
+				// return to first song
 				playSong(0);
 				currentSongIndex = 0;
 			}
@@ -398,7 +385,7 @@ public class AndroidMusicPlayer extends Activity implements OnCompletionListener
 	
 	@Override
 	 public void onDestroy(){
-	 super.onDestroy();
+		super.onDestroy();
 	    mp.release();
 	 }
 	
