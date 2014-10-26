@@ -16,8 +16,6 @@ public class Item {
 	private Date updateDate;
 	private Double price;
 	private int status;
-	private int salfeoff;
-	
 	public int getId() {
 		return id;
 	}
@@ -61,12 +59,6 @@ public class Item {
 	}
 	public void setStatus(int status) {
 		this.status = status;
-	}
-	public int getSalfeoff() {
-		return salfeoff;
-	}
-	public void setSalfeoff(int salfeoff) {
-		this.salfeoff = salfeoff;
 	}
 	
 	

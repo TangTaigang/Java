@@ -8,7 +8,7 @@
 	<title>Game page</title>
 	
 	<script>
-		var ws=new WebSocket("ws://localhost:8080/controller/game");
+		var ws=new WebSocket("ws://localhost:8080/chessgame/game");
 		ws.onopen=function(message){
 			var id_player=1;
 			ws.send("REG"+id_player);
