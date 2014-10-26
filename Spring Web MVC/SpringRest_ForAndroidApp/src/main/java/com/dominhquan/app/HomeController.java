@@ -51,4 +51,19 @@ public class HomeController {
 		item.setUpdateDate(new Date());
 		return item;
 	}
+	
+	/*
+	 *  Admin view
+	 */
+	
+	@RequestMapping(value = "/", method = RequestMethod.GET)
+	public String home(Model model) {
+		model.addAttribute("location","home");
+		return "index";
+	}
+	@RequestMapping(value ="/index", method=RequestMethod.GET)
+	public String index(Model model){
+		model.addAttribute("location","home");
+		return "index";
+	}
 }
