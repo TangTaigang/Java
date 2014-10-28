@@ -66,4 +66,9 @@ public class HomeController {
 		model.addAttribute("location","home");
 		return "index";
 	}
+	@RequestMapping(value ="/list", method=RequestMethod.GET)
+	public String listOrder(Model model){
+		model.addAttribute("location","listOrder");
+		return "tables";
+	}
 }
