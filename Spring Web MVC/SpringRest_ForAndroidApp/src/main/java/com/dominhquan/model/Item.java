@@ -61,5 +61,12 @@ public class Item {
 		this.status = status;
 	}
 	
+	@Override
+	public String toString() {
+		return "Item [id=" + id + ", name=" + name+ ", restaurant=" + restaurant_name
+				+ ", createDate=" + createDate + ", updateDate="
+				+ updateDate + ", price=" + price
+				+ ", status=" + status + "]";
+	}
 	
 }

@@ -1,9 +1,7 @@
 package com.dominhquan.app;
 
-import java.text.DateFormat;
 import java.util.Date;
 import java.util.List;
-import java.util.Locale;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -26,8 +24,8 @@ import com.dominhquan.service.ItemService;
 @Controller
 public class HomeController {
 	
-//	@Autowired
-//	ItemService itemService;
+	@Autowired
+	ItemService itemService;
 	
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
 
@@ -39,11 +37,13 @@ public class HomeController {
 		logger.info("Request item "+ item.getId());
 		return item;
 	}
-//	@RequestMapping(value=AppRestUri.get_item,method=RequestMethod.GET)
-//	public @ResponseBody List<Item> getListRestaurant(){
-//		List<>
-//		return item;
-//	}
+	
+	@RequestMapping(value=AppRestUri.get_all_items_in_restaurant,method=RequestMethod.GET)
+	public @ResponseBody List<Item> getListRestaurant(@PathVariable("name") String name){
+		List<Item> list=itemService.getListItem(name);
+		return list;
+	}
+	
 	@RequestMapping(value=AppRestUri.order_menu,method=RequestMethod.POST)
 	public @ResponseBody Item orderItem(@RequestBody Item item){
 		logger.info("New order : " + item.getId());

@@ -1,16 +1,33 @@
 package com.dominhquan.test;
 
-import org.springframework.web.client.RestTemplate;
+import java.util.List;
+
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import com.dominhquan.model.Item;
+import com.dominhquan.service.ItemServiceImpl;
 
 public class AppTest {
 	
-	public static final String Server_Uri="http://localhost:8080/app";
 	
 	public static void main(String args[]){
-		  RestTemplate restTemplate=new RestTemplate();
-		  Item item=restTemplate.getForObject(Server_Uri+"/rest/item/1",Item.class);
-		  System.out.println(item.getId()+","+item.getName());
+		
+		@SuppressWarnings("resource")
+		ApplicationContext context=new ClassPathXmlApplicationContext("servlet-context.xml");
+		ItemServiceImpl itemServiceImpl= (ItemServiceImpl) context.getBean("itemService");
+		
+		// Create item
+//		for(int i=1;i<10;i++){
+//			Item item=new Item();
+//			item.setId(i);
+//			item.setName("Food-"+i);
+//			item.setRestaurant_name("Restaurant-"+i);
+//			itemServiceImpl.createItem(item);
+//		}
+		List<Item> list=itemServiceImpl.getListItem("Restaurant");
+		for (Item item : list) {
+			System.out.println(item.toString());
+		}
 	}
 }
