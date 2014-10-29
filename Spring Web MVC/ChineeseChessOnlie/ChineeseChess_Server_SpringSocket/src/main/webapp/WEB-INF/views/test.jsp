@@ -6,7 +6,7 @@
 	<head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<title>Game page</title>
-	
+	<script src="//cdn.jsdelivr.net/sockjs/0.3.4/sockjs.min.js"></script>
 	<script>
 		var ws=new WebSocket("ws://localhost:8080/chessgame/game");
 		ws.onopen=function(message){
@@ -17,6 +17,16 @@
 			ws.close();
 		}
 		
+		var socket = new SockJS('/hello');
+        stompClient = Stomp.over(socket);
+        stompClient.connect({}, function(frame) {
+            setConnected(true);
+            console.log('Connected: ' + frame);
+            stompClient.subscribe('/data/contents', function(greeting){
+                showGreeting(JSON.parse(greeting.body).content);
+            });
+        });
+        stompClient.send("/chessgame/chat", {}, JSON.stringify({ 'id': "1" }));
 	</script>
 </head>
 <body>
