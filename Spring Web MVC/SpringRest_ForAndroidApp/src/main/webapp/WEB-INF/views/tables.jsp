@@ -1,15 +1,17 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>SB Admin 2 - Bootstrap Admin Theme</title>
+    <title>List </title>
 
     <!-- Bootstrap Core CSS -->
     <link href="resources/css/bootstrap.min.css" rel="stylesheet">
@@ -36,8 +38,53 @@
 </head>
 
 <body>
-	<jsp:include page="wrapper.jsp" />
-	
+  	<div id="wrapper">
+		<jsp:include page="navbar.jsp" />
+		<div id="page-wrapper">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h1 class="page-header">Tables</h1>
+                </div>
+                <!-- /.col-lg-12 -->
+            </div>
+            <!-- /.row -->
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            DataTables Advanced Tables
+                        </div>
+                        <!-- /.panel-heading -->
+                        <div class="panel-body">
+                            <div class="table-responsive">
+                                <table id="dataTables-example" class="table table-striped table-bordered table-hover" cellspacing="0" width="100%">
+                                    <thead>
+                                    <tr>
+                                        <th>First name</th>
+                                        <th>Last name</th>
+                                        <th>Position</th>
+                                        <th>Office</th>
+                                        <th>Start date</th>
+                                    </tr>
+                                    </thead>
+                                </table>
+
+                            </div>
+                            <!-- /.table-responsive -->
+
+                        </div>
+                        <!-- /.panel-body -->
+                    </div>
+                    <!-- /.panel -->
+                </div>
+                <!-- /.col-lg-12 -->
+            </div>
+            <!-- /.row -->
+        </div>
+        <!-- /#page-wrapper -->
+    </div>
+    <!-- /#wrapper -->
+
     <!-- jQuery Version 1.11.0 -->
     <script src="resources/js/jquery-1.11.0.js"></script>
     <!-- Bootstrap Core JavaScript -->
@@ -110,6 +157,14 @@
             ['Misc','PSP browser','PSP','-','C'],
             ['Other browsers','All others','-','-','U']
         ];
+        var jsonData;
+        $.ajax({
+        	  dataType: "json",
+        	  url: "",
+        	  data: jsonData,
+        	  success: success
+        	});
+        Alert(jsonData);
         $('#dataTables-example').dataTable({
             "data": dataSet,
             "columns": [
@@ -123,7 +178,6 @@
         $('#dataTables-example tbody').on('click', 'tr', function () {
             var id = this.id;
             var index = $.inArray(id, selected);
-
             if ( index === -1 ) {
                 selected.push( id );
             } else {
