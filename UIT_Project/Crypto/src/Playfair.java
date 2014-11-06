@@ -115,7 +115,7 @@ public class Playfair {
 	  }
 	  
 	  /**
-	   * encodes the digraph input with the cipher's specifications
+	   * Playfair cipher encodes the digraph input.
 	   * @param di
 	   * @return
 	   */
@@ -153,12 +153,12 @@ public class Playfair {
 	  }
 	  
 	  /**
-	   * decodes the output given from the cipher and decode methods (opp. of encoding process)
+	   * Playfair cipher decrypt message
 	   * @param out
 	   * @return plain text
 	   */
 	  private String decrypt(String out){
-	    String decoded = "";
+	    String decrypt = "";
 	    for(int i = 0; i < out.length() / 2; i++){
 	      char a = out.charAt(2*i);
 	      char b = out.charAt(2*i+1);
@@ -177,9 +177,9 @@ public class Playfair {
 	        c1 = c2;
 	        c2 = temp;
 	      }
-	      decoded = decoded + table[r1][c1] + table[r2][c2];
+	      decrypt = decrypt + table[r1][c1] + table[r2][c2];
 	    }
-	    return decoded;
+	    return decrypt;
 	  }
 	  
 	  /**
@@ -196,7 +196,10 @@ public class Playfair {
 	    return pt;
 	  }
 	  
-	  // prints the cipher table out for the user
+	  /**
+	   * prints the cipher table out for the user
+	   * @param printedTable
+	   */
 	  private void printTable(String[][] printedTable){
 	    System.out.println("This is the cipher table from the given keyword.");
 	    for(int i = 0; i < 5; i++){
