@@ -23,6 +23,7 @@ public class Vigenere {
 //		System.out.println("Key :"+keyVigenere);
 		System.out.println("This is cipher text :"+ciphertext);
 		System.out.println("This is decrypt text :"+decrypt(ciphertext));
+		System.out.println();
 	}
 	
 	/**

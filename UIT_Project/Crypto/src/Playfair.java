@@ -218,10 +218,10 @@ public class Playfair {
 	   * @param dec
 	   */
 	  private void printResults(String enc, String dec){
-	    System.out.println("This is the cipher text :");
-	    System.out.println(enc);
-	    System.out.println("This is the decrypt text:");
-	    System.out.println(dec);
+		System.out.println("-------------------------Result Play Fair-----------------------------------");
+	    System.out.println("This is the cipher text : " +enc);
+	    System.out.println("This is the decrypt text: " +dec);
+	    System.out.println();
 	  }
 
 }
