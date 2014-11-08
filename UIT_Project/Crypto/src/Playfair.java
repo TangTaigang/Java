@@ -14,18 +14,19 @@ public class Playfair {
 	   * Constructor
 	   */
 	  public Playfair(){
-		    System.out.println("Please input the keyword for Playfair :");
+		    System.out.println("Please input the plain text :");
 		    Scanner sc = new Scanner(System.in);
+		    String input = parseString(sc);
+		    while(input.equals(""))
+		      input = parseString(sc);
+		    System.out.println();
+		    System.out.println("Please input the keyword for Playfair :");
 		    String keyword = parseString(sc);
 		    while(keyword.equals(""))   keyword = parseString(sc);
 		    System.out.println();
 		    table = this.cipherTable(keyword);
 		    // prompts user for message to be encoded
-		    System.out.println("Please input the plain text :");
-		    String input = parseString(sc);
-		    while(input.equals(""))
-		      input = parseString(sc);
-		    System.out.println();
+		  
 		    // encodes and then decodes the encoded message
 		    String output = cipher(input);
 		    String decodedOutput = decrypt(output);
