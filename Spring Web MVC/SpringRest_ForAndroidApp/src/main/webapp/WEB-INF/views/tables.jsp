@@ -86,12 +86,21 @@
     <script src="resources/js/sb-admin-2.js"></script>
     <script>
     $(document).ready(function() {
-        var dataSet = [
-            ['1',"Beanie's Crepe & Waffle",'Win 95+','4','X','A','B'],
-        ];
+    	$.getJSON("http://localhost:6515/app/rest/store/Restaurant",function(result){
+            var data = [];
+           	$.each(result, function() {
+           		var element = [];
+           		console.log(this);
+           		for (var property in this) {
+           			console.log(property);
+           		    if (this.hasOwnProperty(property)) {
+           		        element.push(this[property]);
+           		    }
+           		}
+           		data.push(element);
+           	});
         var table=$('#dataTables-example').dataTable({
-// 		   "data": result,
-            "data": dataSet,
+            "data": data,
             "columns": [
                 { "title": "Id" },
                 { "title": "Name                 ","class": "center" },
@@ -114,12 +123,12 @@
 			          'h'
 			]).draw();
 		}
-        $.getJSON("http://localhost:6515/app/rest/store/Restaurant",function(result){
-        	var data = [];
-        	for(var i in result){
-        	    data.push([i,result[i]]);
-        	}
-          });
+//        $.getJSON("http://localhost:6515/app/rest/store/Restaurant",function(result){
+//        	var data = [];
+//        	for(var i in result){
+//        	    data.push([i,result[i]]);
+//        	}
+//          });
       
         $('#dataTables-example tbody').on('click', 'tr', function () {
             var id = this.id;
@@ -131,7 +140,9 @@
             }
             $(this).toggleClass('selected');
         } );
+    	});
     });
+
     </script>
 
 </body>

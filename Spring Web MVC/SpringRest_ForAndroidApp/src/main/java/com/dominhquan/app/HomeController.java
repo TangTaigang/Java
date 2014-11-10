@@ -34,6 +34,11 @@ public class HomeController {
 	public @ResponseBody Item getItem(@PathVariable("id") int id){
 		Item item=new Item();
 		item.setId(id);
+		item.setName("Chả cá");
+		item.setCreateDate(new Date());
+		item.setUpdateDate(new Date());
+		item.setRestaurant_name("New World");
+		item.setPrice(new Double("125.50"));
 		logger.info("Request item "+ item.getId());
 		return item;
 	}
