@@ -21,7 +21,7 @@ import com.dominhquan.uri.AppRestUri;
 
 
 @Controller
-public class HomeController {
+public class RestController {
 	
 	@Autowired
 	ItemService itemService;
@@ -32,7 +32,7 @@ public class HomeController {
 	@Autowired
 	PasswordEncoder passwordEncoder;
 	
-	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
+	private static final Logger logger = LoggerFactory.getLogger(RestController.class);
 
 	
 	@RequestMapping(value=AppRestUri.get_item,method=RequestMethod.GET)

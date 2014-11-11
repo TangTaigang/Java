@@ -42,20 +42,20 @@ public class ServiceController {
 			if(account.getPassword().length() <4){
 				ObjectError error1=new ObjectError("account.password", "Password must be > 4 ");
 				result.addError(error1);
-				ObjectError error=new ObjectError("account.email", "Email not in database ! ");
-				result.addError(error);
 				return "login";
 			}else{
-				String pass=passwordEncoder.encode("dominhquan");
-				if(!passwordEncoder.matches(account.getPassword(),pass)){
-					ObjectError error=new ObjectError("account.password", "Wrong password ! ");
-					result.addError(error);
-					return "login";
+				Account result_login=accountService.getAccount(account.getEmail());
+				if(result_login!=null){
+					if(!passwordEncoder.matches(account.getPassword(),result_login.getPassword())){
+						ObjectError error=new ObjectError("account.password", "Wrong password ! ");
+						result.addError(error);
+					}
 				}else{
+					ObjectError error=new ObjectError("account.email", "Email not in database ! ");
+					result.addError(error);
+				}
 					status.setComplete();
 					return "login";
-				}
-//				contactService.add(contact);
 			}
 		}
 		model.addAttribute("account",account);
