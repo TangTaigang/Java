@@ -79,6 +79,13 @@
 									</c:forEach>
 								</spring:bind>
 						</spring:hasBindErrors>	
+						<c:forEach items="${sessionExpired}" var="sessionExpired">  
+  							 <br>   
+  							 <div class="alert alert-danger alert-dismissable">
+                              	<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+								<c:out value="${sessionExpired}"/>
+                           	 </div>
+						</c:forEach>
                     </div>
                     <button data-toggle="modal" data-target="#myModal" type="button" class="btn btn-link ">Or Sign Up ?</button>
                 </div>

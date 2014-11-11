@@ -1,6 +1,5 @@
 package com.dominhquan.app;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,7 +31,7 @@ public class LoginController {
 		return "login";
 	}
 	@RequestMapping(value ={"/","/login*"}, method=RequestMethod.POST)
-	public String login_submit(@ModelAttribute("account") Account account,HttpSession httpSession,BindingResult result, SessionStatus status, HttpServletRequest request,Model model){
+	public String login_submit(@ModelAttribute("account") Account account,BindingResult result,HttpSession httpSession,Model model){
 		if(account !=null ){
 			model.addAttribute("account",account);
 			if(account.getPassword().length() <4){
@@ -45,16 +44,26 @@ public class LoginController {
 					if(!passwordEncoder.matches(account.getPassword(),result_login.getPassword())){
 						ObjectError error=new ObjectError("account.password", "Wrong password ! ");
 						result.addError(error);
+						return "login";
 					}
 				}else{
 					ObjectError error=new ObjectError("account.email", "Email not in database ! ");
 					result.addError(error);
-				}
-					status.setComplete();
 					return "login";
+				}
+				account.setPassword("");
+				httpSession.setAttribute("account", account);
+				return "redirect:order";
 			}
 		}
 		model.addAttribute("account",account);
+		return "login";
+	}
+	@RequestMapping(value = {"/logout*"}, method = RequestMethod.GET)
+	public String logout(Model model,SessionStatus sessionStatus,HttpSession httpSession) {
+		httpSession.removeAttribute("account");
+		model.addAttribute("account",new Account());
+		model.addAttribute("sessionExpired","Logout successful !!!!");
 		return "login";
 	}
 }

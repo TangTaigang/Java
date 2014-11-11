@@ -86,7 +86,7 @@
     <script src="resources/js/sb-admin-2.js"></script>
     <script>
     $(document).ready(function() {
-    	$.getJSON("http://localhost:6515/app/rest/store/Restaurant",function(result){
+    	$.getJSON("http://localhost:8080/app/rest/store/Restaurant",function(result){
             var data = [];
            	$.each(result, function() {
            		var element = [];
