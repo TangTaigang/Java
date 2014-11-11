@@ -1,10 +1,10 @@
 package com.dominhquan.app;
 
-import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -69,31 +69,33 @@ public class HomeController {
 	 *  Admin view
 	 */
 	
-	@RequestMapping(value = "/", method = RequestMethod.GET)
+	@RequestMapping(value = {"/*","/login*"}, method = RequestMethod.GET)
 	public String home(Model model) {
 		model.addAttribute("account",new Account());
 		return "login";
 	}
-	@RequestMapping(value ="/", method=RequestMethod.POST)
-	public String login_submit(@ModelAttribute("account") Account account,BindingResult result, SessionStatus status, HttpServletRequest request,Model model){
-		if(account !=null && account.getPassword().length()<=4){
-			ObjectError error=new ObjectError("account.password", "Password must be > 4 ");
-			result.addError(error);
+	@RequestMapping(value ={"/","/login*"}, method=RequestMethod.POST)
+	public String login_submit(@ModelAttribute("account") Account account,HttpSession httpSession,BindingResult result, SessionStatus status, HttpServletRequest request,Model model){
+		if(account !=null ){
+			if(account.getPassword().length() <4){
+				ObjectError error1=new ObjectError("account.password", "Password must be > 4 ");
+				result.addError(error1);
+				ObjectError error=new ObjectError("account.email", "Email not in database ! ");
+				result.addError(error);
+				model.addAttribute("account",account);
+				return "login";
+			}
+			else{
+				status.setComplete();
+				System.out.println(account.getEmail());
+				System.out.println(account.getPassword());
+//				contactService.add(contact);
+			}
 		}
-//		if(contact!=null){
-//			status.setComplete();
-//			System.out.println(contact.getFirstName());
-//			System.out.println(contact.getLastName());
-//			System.out.println(contact.getPhone());
-//			System.out.println(contact.getEmail());
-//			System.out.println(contact.getContact_subject());
-//			System.out.println(contact.getUser_message());
-//			contactService.add(contact);
-//		}
-		model.addAttribute("location","home");
-		return "index";
+		model.addAttribute("account",account);
+		return "login";
 	}
-	@RequestMapping(value ="/index", method=RequestMethod.GET)
+	@RequestMapping(value ="/index**", method=RequestMethod.GET)
 	public String index(Model model){
 		model.addAttribute("location","home");
 		return "index";

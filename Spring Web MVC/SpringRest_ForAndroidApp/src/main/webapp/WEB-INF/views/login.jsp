@@ -46,15 +46,17 @@
                         <h3 class="panel-title">Please Sign In</h3>
                     </div>
                     <div class="panel-body">
-                       <form:form modelAttribute="account">
+                       <form:form modelAttribute="account" action="/app/">
                             <fieldset>
                                 <div class="form-group">
                                    <form:label path="email"  >Email</form:label>
      							   <form:input path="email" cssClass="form-control" placeholder="E-mail" />
+     							   <form:errors path="email" cssStyle="color: #ff0000;"/>
                                 </div>
                                 <div class="form-group">
                                       <form:label path="password"  >Password</form:label>
      							  	  <form:password path="password"  cssClass="form-control" placeholder="Password" />
+     							  	  <form:errors path="password" cssStyle="color: #ff0000;"/>
                                 </div>
                                 <div class="checkbox">
                                     <label>
@@ -62,18 +64,20 @@
                                     </label>
                                 </div>
                                 <!-- Change this to a button or input when using this as a form -->
-                                <button type="button" class="btn btn-primary btn-lg btn-block">Sign in</button>
-                           
+                                <button type="submit" class="btn btn-primary btn-lg btn-block">Sign in</button>
+                             <input type="hidden" name="${_csrf.parameterName}"value="${_csrf.token}" />
                             </fieldset>
                        	</form:form>	
-                       	<spring:hasBindErrors name="contact">
-							<div class="error">
-								<spring:bind path="contact.*">
+                       	<spring:hasBindErrors name="account">
+                   	    		<spring:bind path="account.*">
 									<c:forEach items="${status.errorMessages}" var="error">
-										<h6><a href="#"><c:out value="${error}"/></a></h6>
+									  <br>
+                   	    	  		  <div class="alert alert-danger alert-dismissable">
+                              		  	<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+										<c:out value="${error}"/>
+                           			  </div>
 									</c:forEach>
 								</spring:bind>
-							</div>
 						</spring:hasBindErrors>	
                     </div>
                     <button data-toggle="modal" data-target="#myModal" type="button" class="btn btn-link ">Or Sign Up ?</button>
@@ -124,7 +128,10 @@
 
     <!-- Custom Theme JavaScript -->
     <script src="resources/js/sb-admin-2.js"></script>
-
+	 <script>
+            $("#email").attr('required', ''); 
+            $("#password").attr('required', ''); 
+    </script>
 </body>
 
 </html>
