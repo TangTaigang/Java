@@ -50,13 +50,11 @@
                             <fieldset>
                                 <div class="form-group">
                                    <form:label path="email"  >Email</form:label>
-     							   <form:input path="email" cssClass="form-control" placeholder="E-mail" />
-     							   <form:errors path="email" cssStyle="color: #ff0000;"/>
+     							   <form:input path="email"  cssClass="form-control" placeholder="E-mail" />
                                 </div>
                                 <div class="form-group">
-                                      <form:label path="password"  >Password</form:label>
-     							  	  <form:password path="password"  cssClass="form-control" placeholder="Password" />
-     							  	  <form:errors path="password" cssStyle="color: #ff0000;"/>
+                                      <form:label path="password"  >Password </form:label>
+     							  	  <form:password path="password" cssClass="form-control" placeholder="Password (greater than 4 character)" />
                                 </div>
                                 <div class="checkbox">
                                     <label>
@@ -87,7 +85,7 @@
                            	 </div>
 						</c:forEach>
                     </div>
-                    <button data-toggle="modal" data-target="#myModal" type="button" class="btn btn-link ">Or Sign Up ?</button>
+                    <button data-toggle="modal" data-target="#myModal" type="button" class="btn btn-link ">Sign Up ?</button>
                 </div>
             </div>
         </div>
@@ -137,7 +135,9 @@
     <script src="resources/js/sb-admin-2.js"></script>
 	 <script>
             $("#email").attr('required', ''); 
+            $("#email").prop('type', 'email');
             $("#password").attr('required', ''); 
+            $("#password").attr('pattern','.{4,10}'); 
     </script>
 </body>
 

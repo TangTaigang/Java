@@ -35,7 +35,7 @@ public class LoginController {
 		if(account !=null ){
 			model.addAttribute("account",account);
 			if(account.getPassword().length() <4){
-				ObjectError error1=new ObjectError("account.password", "Password must be > 4 ");
+				ObjectError error1=new ObjectError("account.password", "Password length must be greater than 4 ");
 				result.addError(error1);
 				return "login";
 			}else{
