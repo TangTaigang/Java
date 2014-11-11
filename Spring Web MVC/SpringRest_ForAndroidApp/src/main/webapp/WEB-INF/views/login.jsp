@@ -100,21 +100,30 @@
                                             <h4 class="modal-title" id="myModalLabel">Sign Up Form</h4>
                                         </div>
                                 <div class="modal-body">
-                                       <fieldset>
-                                     	    <div class="form-group">
-			                                    <input class="form-control" placeholder="Display Name" name="name" type="text" value="">
-			                                </div>
-			                                <div class="form-group">
-			                                    <input class="form-control" placeholder="E-mail" name="email" type="email" autofocus>
-			                                </div>
-			                                <div class="form-group">
-			                                    <input class="form-control" placeholder="Password" name="password" type="password" value="">
-			                                </div>
-                          			  </fieldset>
+                                           <form:form modelAttribute="account" action="/app/" id="formRegAccount">
+					                            <fieldset>
+					                           		<div class="form-group">
+					                                   <form:label path="name">Display name</form:label>
+					     							   <form:input path="name"  cssClass="form-control" placeholder="Restaurant name" />
+					                                </div>
+					                                <div class="form-group">
+					                                   <form:label path="email">Email</form:label>
+					     							   <form:input path="email"  cssClass="form-control" placeholder="E-mail" />
+					                                </div>
+					                                <div class="form-group">
+					                                      <form:label path="password"  >Password </form:label>
+					     							  	  <form:password path="password" cssClass="form-control" placeholder="Password (greater than 4 character)" />
+					                                </div>
+					                               <div class="form-group">
+			                                    		<input class="form-control" placeholder="Confirm Password" name="password" type="password" value="">
+			                              		  </div>
+					                             <input type="hidden" name="${_csrf.parameterName}"value="${_csrf.token}" />
+					                            </fieldset>
+                      					 </form:form>	
                                </div>
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                            <button type="button" class="btn btn-primary">Sign Up</button>
+                                            <button type="button" class="btn btn-primary" id="regButton">Sign Up</button>
                                         </div>
                                     </div>
                                     <!-- /.modal-content -->
@@ -133,11 +142,34 @@
 
     <!-- Custom Theme JavaScript -->
     <script src="resources/js/sb-admin-2.js"></script>
-	 <script>
+	<script>
             $("#email").attr('required', ''); 
             $("#email").prop('type', 'email');
             $("#password").attr('required', ''); 
             $("#password").attr('pattern','.{4,10}'); 
+            $("#regButton").click(function(){
+				  var email="dominhquan";  
+				  var name="dominhquan";
+				  var password="password";
+            	  var url= "http://localhost:8080/app/rest/check/";
+            	  var json = {"name":name,"email":email,"password":password};
+            	  $.ajax({
+            	        url: url,
+            	        data: JSON.stringify(json),
+            	        type: "POST",
+            	        beforeSend: function(xhr) {
+            	            xhr.setRequestHeader("Accept", "application/json");
+            	            xhr.setRequestHeader("Content-Type", "application/json");
+            	        },
+            	        success: function(account) {
+            	        	if(account.email=='fail'){
+                	            alert("Email đã tồn tại !! ");
+            	        	}else{
+            	        		
+            	        	}    
+            	        }
+            	    });
+          	  });
     </script>
 </body>
 

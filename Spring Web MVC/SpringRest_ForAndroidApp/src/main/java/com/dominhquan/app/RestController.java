@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.dominhquan.model.Account;
 import com.dominhquan.model.Item;
 import com.dominhquan.service.ItemService;
 import com.dominhquan.uri.AppRestUri;
@@ -58,5 +59,10 @@ public class RestController {
 		return item;
 	}
 	
+	@RequestMapping(value=AppRestUri.check_account,method=RequestMethod.POST)
+	public @ResponseBody Account checkAccount(@RequestBody Account account){
+		account.setEmail("fail");
+		return account;
+	}
 	
 }

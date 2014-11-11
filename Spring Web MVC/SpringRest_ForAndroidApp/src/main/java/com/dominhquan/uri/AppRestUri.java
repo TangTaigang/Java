@@ -9,4 +9,5 @@ public class AppRestUri {
 	public static final String create_item="rest/item/create";
 	public static final String get_order_menu="rest/order/{id}";
 	public static final String order_menu="rest/create_order";
+	public static final String check_account="rest/check";
 }
