@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.dominhquan.model.Item;
-import com.dominhquan.service.AccountService;
 import com.dominhquan.service.ItemService;
 import com.dominhquan.uri.AppRestUri;
 
@@ -25,9 +24,6 @@ public class RestController {
 	
 	@Autowired
 	ItemService itemService;
-	
-	@Autowired
-	AccountService accountService;
 	
 	@Autowired
 	PasswordEncoder passwordEncoder;
