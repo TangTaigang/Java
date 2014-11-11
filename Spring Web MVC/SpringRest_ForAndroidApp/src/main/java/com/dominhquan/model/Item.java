@@ -2,6 +2,7 @@ package com.dominhquan.model;
 
 import java.util.Date;
 
+import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
@@ -9,6 +10,7 @@ import com.fasterxml.jackson.databind.ser.std.DateSerializer;
 
 @Document
 public class Item {
+	@Id
 	private int id;
 	private String name;
 	private String restaurant_name;

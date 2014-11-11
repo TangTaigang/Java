@@ -1,4 +1,4 @@
-package com.dominhquan.app;
+package com.dominhquan.uri;
 
 public class AppRestUri {
 	public static final String get_item="/rest/item/{id}";

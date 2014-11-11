@@ -34,27 +34,26 @@
     </beans:bean>
      
     <!-- Configure bean to convert JSON to POJO and vice versa -->
-    <beans:bean id="jsonMessageConverter" class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
-    </beans:bean> 
+    <beans:bean id="jsonMessageConverter" class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter"> </beans:bean> 
 	
 	<context:component-scan base-package="com.dominhquan.app" />
-	
-	<context:component-scan base-package="com.shopmongo.control" />
 	
 	<beans:bean id="itemService" class="com.dominhquan.service.ItemServiceImpl">
 		<!-- <beans:property name="mongoTemplate" ref="mongoTemplate" />-->
 		<beans:constructor-arg name="mongoTemplate" ref="mongoTemplate"/>
 	</beans:bean>
-	<beans:bean id="accountService" class="com.dominhquan.service.ItemServiceImpl">
-		<!-- <beans:property name="mongoTemplate" ref="mongoTemplate" />-->
+	<beans:bean id="accountService" class="com.dominhquan.service.AccountServiceImpl">
 		<beans:constructor-arg name="mongoTemplate" ref="mongoTemplate"/>
 	</beans:bean>
 	<beans:bean id="mongoTemplate" class="org.springframework.data.mongodb.core.MongoTemplate">
 		<beans:constructor-arg  name="mongoDbFactory" ref="mongoDbFactory"/>
 	</beans:bean>
 	
-	<mongo:db-factory host="localhost" port="27017" dbname="shopStore" />
+	<mongo:db-factory host="192.168.1.20" port="27017" dbname="shopStore" />
 	
+	<beans:bean id="encoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder">  
+  		<beans:constructor-arg name="strength" value="10" />  
+ 	</beans:bean>  
 	
 	
 </beans:beans>
