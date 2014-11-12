@@ -56,7 +56,7 @@ public class LoginController {
 					return "login";
 				}
 				account.setPassword("");
-				httpSession.setAttribute("account", account);
+				httpSession.setAttribute("account", result_login);
 				return "redirect:order";
 			}
 		}

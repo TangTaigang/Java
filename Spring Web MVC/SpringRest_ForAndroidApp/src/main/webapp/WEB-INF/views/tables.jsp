@@ -43,7 +43,9 @@
 		<div id="page-wrapper">
             <div class="row">
                 <div class="col-lg-12">
-                    <h1 class="page-header">Tables</h1>
+                    <h1 class="page-header">
+                  		List food -  <c:out value="${data.name}"/> restaurant
+                  		</h1>
                 </div>
                 <!-- /.col-lg-12 -->
             </div>
@@ -52,7 +54,7 @@
                 <div class="col-lg-12">
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                            DataTables Advanced Tables
+                            List food in database
                         </div>
                         <!-- /.panel-heading -->
                         <div class="panel-body">
@@ -112,6 +114,9 @@
             ]
         });
  	    var add=$('#dataTables-example').DataTable();
+ 	    $('#dataTables-example tbody').on('click','tr',function(){
+ 	    	alert(add.row(this).data());
+ 	    });
         for (var i = 0; i < 8; i++) {
 			add.row.add([
 			          'a',

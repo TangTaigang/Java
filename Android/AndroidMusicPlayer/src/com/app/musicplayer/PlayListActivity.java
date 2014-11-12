@@ -29,37 +29,38 @@ public class PlayListActivity extends ListActivity {
 		SongsManager plm = new SongsManager();
 		
 		this.songsList = plm.getPlayList();
-
-		// looping through playlist
-		for (int i = 0; i < songsList.size(); i++) {
-				HashMap<String, String> song = songsList.get(i);
-				songsListData.add(song);
-		}
-
-		// Adding menuItems to ListView
-		ListAdapter adapter = new SimpleAdapter(this, songsListData,
-												R.layout.playlist_item, 
-												new String[] { "songTitle" }, 
-												new int[] {	R.id.songTitle });
-		setListAdapter(adapter);
-		// selecting single ListView item
-		ListView lv = getListView();
-		// listening to single listitem click
-		lv.setOnItemClickListener(new OnItemClickListener() {
-			@Override
-			public void onItemClick(AdapterView<?> parent, View view,
-					int position, long id) {
-				// getting listitem index
-				int songIndex = position;
-				// Starting new intent
-				Intent in = new Intent(getApplicationContext(),
-						AndroidMusicPlayer.class);
-				// Sending songIndex to PlayerActivity
-				in.putExtra("songIndex", songIndex);
-				setResult(100, in);
-				// Closing PlayListView
-				finish();
+		if(!this.songsList.isEmpty()){
+			// looping through playlist
+			for (int i = 0; i < songsList.size(); i++) {
+					HashMap<String, String> song = songsList.get(i);
+					songsListData.add(song);
 			}
-		});
+
+			// Adding menuItems to ListView
+			ListAdapter adapter = new SimpleAdapter(this, songsListData,
+													R.layout.playlist_item, 
+													new String[] { "songTitle" }, 
+													new int[] {	R.id.songTitle });
+			setListAdapter(adapter);
+			// selecting single ListView item
+			ListView lv = getListView();
+			// listening to single listitem click
+			lv.setOnItemClickListener(new OnItemClickListener() {
+				@Override
+				public void onItemClick(AdapterView<?> parent, View view,
+						int position, long id) {
+					// getting listitem index
+					int songIndex = position;
+					// Starting new intent
+					Intent in = new Intent(getApplicationContext(),
+							AndroidMusicPlayer.class);
+					// Sending songIndex to PlayerActivity
+					in.putExtra("songIndex", songIndex);
+					setResult(100, in);
+					// Closing PlayListView
+					finish();
+				}
+			});
+		}
 	}
 }

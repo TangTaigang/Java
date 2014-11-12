@@ -6,8 +6,8 @@ import com.dominhquan.model.Item;
 
 public interface ItemService {
 	void createItem(Item item);
-	Item getItem(int id);
+	Item getItem(String id);
 	void removeItem(int id);
-	void updateItem();
+	void updateItem(Item item);
 	List<Item> getListItem(String restaurant);
 }

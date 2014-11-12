@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.dominhquan.model.Account;
 import com.dominhquan.model.Item;
+import com.dominhquan.service.AccountService;
 import com.dominhquan.service.ItemService;
 import com.dominhquan.uri.AppRestUri;
 
@@ -28,6 +29,9 @@ public class RestController {
 	
 	@Autowired
 	PasswordEncoder passwordEncoder;
+	
+	@Autowired
+	AccountService accountService;
 	
 	private static final Logger logger = LoggerFactory.getLogger(RestController.class);
 
@@ -61,11 +65,13 @@ public class RestController {
 	
 	@RequestMapping(value=AppRestUri.check_account,method=RequestMethod.POST)
 	public @ResponseBody Account checkAccount(@RequestBody Account account){
-		System.out.println(account.getEmail());
-		System.out.println(account.getPassword());
-		System.out.println(account.getName());
+		Account check=accountService.getAccount(account.getEmail());
+		if(check!=null){
+			account.setEmail("fail");
+		}else{
+			accountService.add(account);
+		}
 		account.setPassword("");
-//		account.setEmail("fail");
 		return account;
 	}
 	

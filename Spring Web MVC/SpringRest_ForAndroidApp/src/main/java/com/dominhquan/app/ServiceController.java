@@ -18,10 +18,8 @@ public class ServiceController {
 	public String listOrder(Model model,HttpSession httpSession){
 		if(validateSession(httpSession)){
 			Account account=(Account) httpSession.getAttribute("account");
-			System.out.println("-----------------------------");
-			System.out.println(account.getEmail());
-			System.out.println(account.getPassword());
-			System.out.println("-----------------------------");
+			System.out.println(account.getName());
+			model.addAttribute("data",account);
 			return "tables";
 		}
 		model.addAttribute("sessionExpired","User session expired please login again !!!!");

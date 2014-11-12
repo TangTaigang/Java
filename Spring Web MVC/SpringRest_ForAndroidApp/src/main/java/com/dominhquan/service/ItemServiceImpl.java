@@ -5,6 +5,7 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
@@ -32,9 +33,9 @@ public class ItemServiceImpl implements ItemService{
 	}
 
 	@Override
-	public Item getItem(int id) {
-		
-		return null;
+	public Item getItem(String id) {
+		query=new Query(Criteria.where("_id").is(id));
+		return mongoTemplate.findOne(query, Item.class);
 	}
 	
 	@Override
@@ -44,14 +45,19 @@ public class ItemServiceImpl implements ItemService{
 	}
 
 	@Override
-	public void updateItem() {
-		// TODO Auto-generated method stub
-		
+	public void updateItem(Item item) {
+		mongoTemplate.save(item);
+		logger.info("Save item successfully, Details : "+ item.toString());
 	}
 	@Override
 	public List<Item> getListItem(String restaurant) {
 		query=new Query(Criteria.where("restaurant_name").regex(restaurant));
 		return mongoTemplate.find(query, Item.class);
 	}
-
+	
+	public List<Item> getListHotItem(String restaurant){
+		query=new Query(Criteria.where("restaurant_name").is(restaurant).and("status").is(1));
+		query.with(new Sort(Sort.Direction.DESC,"updateDate"));
+		return mongoTemplate.find(query, Item.class);
+	}
 }

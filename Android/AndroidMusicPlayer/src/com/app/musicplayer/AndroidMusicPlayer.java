@@ -77,9 +77,9 @@ public class AndroidMusicPlayer extends Activity implements OnCompletionListener
 		
 		// Getting all songs list
 		songsList = songManager.getPlayList();
-		
-		// Default play first song
-		playSong(0);
+		if(!songsList.isEmpty()){
+			playSong(0);
+		}
 				
 		/**
 		 * Play button click event
@@ -89,6 +89,7 @@ public class AndroidMusicPlayer extends Activity implements OnCompletionListener
 		btnPlay.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View arg0) {
+				if(!songsList.isEmpty()){
 				// check for already playing
 				if(mp.isPlaying()){
 					if(mp!=null){
@@ -103,7 +104,7 @@ public class AndroidMusicPlayer extends Activity implements OnCompletionListener
 						Toast.makeText(getApplicationContext(), "Resume", Toast.LENGTH_SHORT).show();
 						btnPlay.setImageResource(R.drawable.btn_pause);
 					}
-				}
+				}}
 			}
 		});
 		
@@ -114,15 +115,17 @@ public class AndroidMusicPlayer extends Activity implements OnCompletionListener
 		btnForward.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View arg0) {
-				// get current song position				
-				int currentPosition = mp.getCurrentPosition();
-				// check if seekForward time is lesser than song duration
-				if(currentPosition + seekForwardTime <= mp.getDuration()){
-					// forward song
-					mp.seekTo(currentPosition + seekForwardTime);
-				}else{
-					// forward to end position
-					mp.seekTo(mp.getDuration());
+				if(!songsList.isEmpty()){
+					// get current song position				
+					int currentPosition = mp.getCurrentPosition();
+					// check if seekForward time is lesser than song duration
+					if(currentPosition + seekForwardTime <= mp.getDuration()){
+						// forward song
+						mp.seekTo(currentPosition + seekForwardTime);
+					}else{
+						// forward to end position
+						mp.seekTo(mp.getDuration());
+					}
 				}
 			}
 		});
@@ -134,6 +137,7 @@ public class AndroidMusicPlayer extends Activity implements OnCompletionListener
 		btnBackward.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View arg0) {
+				if(!songsList.isEmpty()){
 				// get current song position				
 				int currentPosition = mp.getCurrentPosition();
 				// check if seekBackward time is greater than 0 sec
@@ -144,7 +148,7 @@ public class AndroidMusicPlayer extends Activity implements OnCompletionListener
 					// backward to starting position
 					mp.seekTo(0);
 				}
-				
+				}
 			}
 		});
 		
@@ -155,6 +159,7 @@ public class AndroidMusicPlayer extends Activity implements OnCompletionListener
 		btnNext.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View arg0) {
+				if(!songsList.isEmpty()){
 				// check if next song is there or not
 				if(currentSongIndex < (songsList.size() - 1)){
 					playSong(currentSongIndex + 1);
@@ -164,7 +169,7 @@ public class AndroidMusicPlayer extends Activity implements OnCompletionListener
 					playSong(0);
 					currentSongIndex = 0;
 				}
-				
+				}
 			}
 		});
 		
@@ -176,6 +181,7 @@ public class AndroidMusicPlayer extends Activity implements OnCompletionListener
 			
 			@Override
 			public void onClick(View arg0) {
+				if(!songsList.isEmpty()){
 				if(currentSongIndex > 0){
 					playSong(currentSongIndex - 1);
 					currentSongIndex = currentSongIndex - 1;
@@ -184,7 +190,7 @@ public class AndroidMusicPlayer extends Activity implements OnCompletionListener
 					playSong(songsList.size() - 1);
 					currentSongIndex = songsList.size() - 1;
 				}
-				
+				}
 			}
 		});
 		
@@ -196,6 +202,7 @@ public class AndroidMusicPlayer extends Activity implements OnCompletionListener
 			
 			@Override
 			public void onClick(View arg0) {
+				if(!songsList.isEmpty()){
 				if(isRepeat){
 					isRepeat = false;
 					Toast.makeText(getApplicationContext(), "Repeat is OFF", Toast.LENGTH_SHORT).show();
@@ -208,7 +215,8 @@ public class AndroidMusicPlayer extends Activity implements OnCompletionListener
 					isShuffle = false;
 					btnRepeat.setImageResource(R.drawable.btn_repeat_focused);
 					btnShuffle.setImageResource(R.drawable.btn_shuffle);
-				}	
+				}
+				}
 			}
 		});
 		
@@ -334,7 +342,9 @@ public class AndroidMusicPlayer extends Activity implements OnCompletionListener
 	 * */
 	@Override
 	public void onStartTrackingTouch(SeekBar seekBar) {
+		if(!songsList.isEmpty()){
 		mHandler.removeCallbacks(mUpdateTimeTask);
+		}
     }
 	
 	/**
@@ -342,6 +352,7 @@ public class AndroidMusicPlayer extends Activity implements OnCompletionListener
 	 * */
 	@Override
     public void onStopTrackingTouch(SeekBar seekBar) {
+		if(!songsList.isEmpty()){
 		mHandler.removeCallbacks(mUpdateTimeTask);
 		int totalDuration = mp.getDuration();
 		int currentPosition = utils.progressToTimer(seekBar.getProgress(), totalDuration);
@@ -349,6 +360,7 @@ public class AndroidMusicPlayer extends Activity implements OnCompletionListener
 		mp.seekTo(currentPosition);
 		// update timer progress again
 		updateProgressBar();
+		}
     }
 
 	/**
@@ -380,10 +392,6 @@ public class AndroidMusicPlayer extends Activity implements OnCompletionListener
 		}
 	}
 	
-	@Override
-	 public void onDestroy(){
-		super.onDestroy();
-	    mp.release();
-	 }
+	
 	
 }
