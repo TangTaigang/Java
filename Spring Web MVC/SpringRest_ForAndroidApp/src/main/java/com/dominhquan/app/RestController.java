@@ -33,7 +33,7 @@ public class RestController {
 
 	
 	@RequestMapping(value=AppRestUri.get_item,method=RequestMethod.GET)
-	public @ResponseBody Item getItem(@PathVariable("id") int id){
+	public @ResponseBody Item getItem(@PathVariable("id") String id){
 		Item item=new Item();
 		item.setId(id);
 		item.setName("Chả cá");

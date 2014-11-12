@@ -8,20 +8,21 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.databind.ser.std.DateSerializer;
 
-@Document
+@Document(collection="item")
 public class Item {
 	@Id
-	private int id;
+	private String id;
 	private String name;
 	private String restaurant_name;
 	private Date createDate;
 	private Date updateDate;
 	private Double price;
 	private int status;
-	public int getId() {
+	
+	public String getId() {
 		return id;
 	}
-	public void setId(int id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 	public String getName() {

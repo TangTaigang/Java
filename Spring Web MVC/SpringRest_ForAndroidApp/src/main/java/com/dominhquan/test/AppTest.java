@@ -1,5 +1,6 @@
 package com.dominhquan.test;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.context.ApplicationContext;
@@ -17,31 +18,34 @@ public class AppTest {
 		
 		@SuppressWarnings("resource")
 		ApplicationContext context=new ClassPathXmlApplicationContext("servlet-context.xml");
-//		ItemServiceImpl itemServiceImpl= (ItemServiceImpl) context.getBean("itemService");
 		AccountServiceImpl accountServiceImpl=(AccountServiceImpl) context.getBean("accountService");
 		Account account=new Account();
-//		account.setEmail("dominhquan.uit@gmail.com");
-//		account.setName("Đỗ Minh Quân");
-//		account.setPassword("123456");
-//		accountServiceImpl.add(account);
-		
-		account=accountServiceImpl.getAccount("dominhquan.uit@gmail.com");
-		if(account!=null){
-			System.out.println(account.getPassword());
-		}else{
-			System.out.println("Fail");
+		account.setEmail("dominhquan.uit@gmail.com");
+		account.setName("Đỗ Minh Quân");
+		account.setPassword("123456");
+		accountServiceImpl.add(account);
+//		
+//		account=accountServiceImpl.getAccount("dominhquan.uit@gmail.com");
+//		if(account!=null){
+//			System.out.println(account.getPassword());
+//		}else{
+//			System.out.println("Fail");
+//		}
+//		 Create item
+		ItemServiceImpl itemServiceImpl= (ItemServiceImpl) context.getBean("itemService");
+		for(int i=1;i<21;i++){
+			Item item=new Item();
+			item.setId("food"+i);
+			item.setName("Food-"+i);
+			item.setRestaurant_name("Restaurant-"+i);
+			item.setCreateDate(new Date());
+			item.setUpdateDate(new Date());
+			item.setPrice(new Double(125.50*i));
+			itemServiceImpl.createItem(item);
 		}
-		// Create item
-//		for(int i=1;i<10;i++){
-//			Item item=new Item();
-//			item.setId(i);
-//			item.setName("Food-"+i);
-//			item.setRestaurant_name("Restaurant-"+i);
-//			itemServiceImpl.createItem(item);
-//		}
-//		List<Item> list=itemServiceImpl.getListItem("Restaurant");
-//		for (Item item : list) {
-//			System.out.println(item.toString());
-//		}
+		List<Item> list=itemServiceImpl.getListItem("Restaurant");
+		for (Item item : list) {
+			System.out.println(item.toString());
+		}
 	}
 }

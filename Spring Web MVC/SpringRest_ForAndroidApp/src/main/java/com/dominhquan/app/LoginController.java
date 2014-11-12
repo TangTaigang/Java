@@ -26,10 +26,14 @@ public class LoginController {
 	PasswordEncoder passwordEncoder;
 	
 	@RequestMapping(value = {"/*","/login*"}, method = RequestMethod.GET)
-	public String home(Model model) {
+	public String home(Model model,HttpSession httpSession) {
+		if(validateSession(httpSession)){
+			return "redirect:order";
+		}
 		model.addAttribute("account",new Account());
 		return "login";
 	}
+	
 	@RequestMapping(value ={"/","/login*"}, method=RequestMethod.POST)
 	public String login_submit(@ModelAttribute("account") Account account,BindingResult result,HttpSession httpSession,Model model){
 		if(account !=null ){
@@ -59,11 +63,20 @@ public class LoginController {
 		model.addAttribute("account",account);
 		return "login";
 	}
+	
 	@RequestMapping(value = {"/logout*"}, method = RequestMethod.GET)
 	public String logout(Model model,SessionStatus sessionStatus,HttpSession httpSession) {
 		httpSession.removeAttribute("account");
 		model.addAttribute("account",new Account());
 		model.addAttribute("sessionExpired","Logout successful !!!!");
 		return "login";
+	}
+	
+	public boolean validateSession(HttpSession httpSession){
+		Account account= ((httpSession.getAttribute("account")!=null) ? (Account) httpSession.getAttribute("account")  :new Account());
+		if(account.getEmail()==null || account.getEmail().equalsIgnoreCase("")){
+			return false;
+		}
+		return true;
 	}
 }

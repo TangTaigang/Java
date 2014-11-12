@@ -1,24 +1,16 @@
 package com.dominhquan.model;
 
 import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-@Document
+@Document(collection="account")
 public class Account {
-	@Id
-	private int id;
+	
 	private String name;
-	@Indexed(unique=true)
+	@Id
 	private String email;
 	private String password;
 	
-	public int getId() {
-		return id;
-	}
-	public void setId(int id) {
-		this.id = id;
-	}
 	public String getName() {
 		return name;
 	}

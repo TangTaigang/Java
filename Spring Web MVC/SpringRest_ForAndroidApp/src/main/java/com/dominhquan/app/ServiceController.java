@@ -14,10 +14,10 @@ import com.dominhquan.model.Account;
 @SessionAttributes("account")
 public class ServiceController {
 
-	@RequestMapping(value ="/order", method=RequestMethod.GET)
+	@RequestMapping(value ="/order*", method=RequestMethod.GET)
 	public String listOrder(Model model,HttpSession httpSession){
-		Account account= ((httpSession.getAttribute("account")!=null) ? (Account) httpSession.getAttribute("account")  :new Account());
-		if(account.getEmail()!=null){
+		if(validateSession(httpSession)){
+			Account account=(Account) httpSession.getAttribute("account");
 			System.out.println("-----------------------------");
 			System.out.println(account.getEmail());
 			System.out.println(account.getPassword());
@@ -28,10 +28,34 @@ public class ServiceController {
 		model.addAttribute("account",new Account());
 		return "login";
 	}
-	@RequestMapping(value ="/item**", method=RequestMethod.GET)
+	
+	@RequestMapping(value ="/item*", method=RequestMethod.GET)
 	public String listItems(Model model){
 		model.addAttribute("location","listItem");
 		return "tables";
+	}
+	
+	@RequestMapping(value ="/dashboard*", method=RequestMethod.GET)
+	public String dashboard(Model model,HttpSession httpSession){
+		if(validateSession(httpSession)){
+			Account account=(Account) httpSession.getAttribute("account");
+			System.out.println("-----------------------------");
+			System.out.println(account.getEmail());
+			System.out.println(account.getPassword());
+			System.out.println("-----------------------------");
+			return "index";
+		}
+		model.addAttribute("sessionExpired","User session expired please login again !!!!");
+		model.addAttribute("account",new Account());
+		return "login";
+	}
+	
+	public boolean validateSession(HttpSession httpSession){
+		Account account= ((httpSession.getAttribute("account")!=null) ? (Account) httpSession.getAttribute("account")  :new Account());
+		if(account.getEmail()==null || account.getEmail().equalsIgnoreCase("")){
+			return false;
+		}
+		return true;
 	}
 }
  
