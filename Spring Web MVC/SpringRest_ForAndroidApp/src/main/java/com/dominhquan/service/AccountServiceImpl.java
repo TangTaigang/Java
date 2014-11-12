@@ -20,6 +20,7 @@ public class AccountServiceImpl implements AccountService{
 	
 	@Autowired
 	PasswordEncoder passwordEncoder;
+	
 	public AccountServiceImpl (MongoTemplate mongoTemplate){
 		this.mongoTemplate=mongoTemplate;
 	}

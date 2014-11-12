@@ -100,22 +100,22 @@
                                             <h4 class="modal-title" id="myModalLabel">Sign Up Form</h4>
                                         </div>
                                 <div class="modal-body">
-                                           <form:form modelAttribute="account" action="/app/" id="formRegAccount">
+                                           <form:form modelAttribute="account" action="" id="formRegAccount">
 					                            <fieldset>
 					                           		<div class="form-group">
 					                                   <form:label path="name">Display name</form:label>
-					     							   <form:input path="name"  cssClass="form-control" placeholder="Restaurant name" />
+					     							   <form:input path="name"  cssClass="form-control" placeholder="Restaurant name" id="nameReg"/>
 					                                </div>
 					                                <div class="form-group">
 					                                   <form:label path="email">Email</form:label>
-					     							   <form:input path="email"  cssClass="form-control" placeholder="E-mail" />
+					     							   <form:input path="email"  cssClass="form-control" placeholder="E-mail" id="emailReg"/>
 					                                </div>
 					                                <div class="form-group">
 					                                      <form:label path="password"  >Password </form:label>
-					     							  	  <form:password path="password" cssClass="form-control" placeholder="Password (greater than 4 character)" />
+					     							  	  <form:password path="password" cssClass="form-control" placeholder="Password (greater than 4 character)" id="passwordReg"/>
 					                                </div>
 					                               <div class="form-group">
-			                                    		<input class="form-control" placeholder="Confirm Password" name="password" type="password" value="">
+			                                    		<input class="form-control" placeholder="Confirm Password" name="password" type="password" value="" id="passwordRegConFirm">
 			                              		  </div>
 					                             <input type="hidden" name="${_csrf.parameterName}"value="${_csrf.token}" />
 					                            </fieldset>
@@ -148,27 +148,54 @@
             $("#password").attr('required', ''); 
             $("#password").attr('pattern','.{4,10}'); 
             $("#regButton").click(function(){
-				  var email="dominhquan";  
-				  var name="dominhquan";
-				  var password="password";
+            	  function validateEmail(sEmail) {
+            		var filter = /^([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/;
+            		if (filter.test(sEmail)) { return true; }
+            		else { return false;}
+            	  }
+				  var email=$("#emailReg").val();
+				  var name=$("#nameReg").val();
+				  var password=$("#passwordReg").val();
+				  var passconfirm=$("#passwordRegConFirm").val();
             	  var url= "http://localhost:8080/app/rest/check/";
             	  var json = {"name":name,"email":email,"password":password};
-            	  $.ajax({
-            	        url: url,
-            	        data: JSON.stringify(json),
-            	        type: "POST",
-            	        beforeSend: function(xhr) {
-            	            xhr.setRequestHeader("Accept", "application/json");
-            	            xhr.setRequestHeader("Content-Type", "application/json");
-            	        },
-            	        success: function(account) {
-            	        	if(account.email=='fail'){
-                	            alert("Email đã tồn tại !! ");
-            	        	}else{
-            	        		
-            	        	}    
-            	        }
-            	    });
+            	  if ($.trim(email).length == 0) {
+                      alert('Please enter email address');
+                      e.preventDefault();
+                  }else{
+                      if (!validateEmail(email)) {
+                          alert('Invalid Email Address');
+                          e.preventDefault();
+                      }else{
+                    	  if(password!=passconfirm){
+                    		  alert("Check your password again !! ");
+                    		  e.preventDefault();
+                    	  }
+                    	  $.ajax({
+                    	        url: url,
+                    	        data: JSON.stringify(json),
+                    	        type: "POST",
+                    	        beforeSend: function(xhr) {
+                    	            xhr.setRequestHeader("Accept", "application/json");
+                    	            xhr.setRequestHeader("Content-Type", "application/json");
+                    	        },
+                    	        success: function(account) {
+                    	        	if(account.email=='fail'){
+                        	            alert("Email đã tồn tại !! ");
+                    	        	}else{
+                    	        		alert("Đăng ký thành công !! ");
+                    	        		$("#nameReg").val("");
+                    	        		$("#emailReg").val("");
+                    	        		$("#passwordReg").val("");
+                    	        		$("#passwordRegConFirm").val("");
+                        	            $("#myModal").modal("hide");
+                        	            $("#email").val(email); 
+                    	        	}    
+                    	        }
+                    	    });
+                      }
+                  }
+                 
           	  });
     </script>
 </body>

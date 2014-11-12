@@ -61,7 +61,11 @@ public class RestController {
 	
 	@RequestMapping(value=AppRestUri.check_account,method=RequestMethod.POST)
 	public @ResponseBody Account checkAccount(@RequestBody Account account){
-		account.setEmail("fail");
+		System.out.println(account.getEmail());
+		System.out.println(account.getPassword());
+		System.out.println(account.getName());
+		account.setPassword("");
+//		account.setEmail("fail");
 		return account;
 	}
 	
