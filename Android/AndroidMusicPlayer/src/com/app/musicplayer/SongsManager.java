@@ -10,16 +10,19 @@ import android.os.Environment;
 public class SongsManager {
 	
 	private ArrayList<HashMap<String, String>> songsList = new ArrayList<HashMap<String, String>>();
-	public final String PATH = Environment.getExternalStorageDirectory().toString() + "/Download";
+	public final String PATH_DOWNLOAD = Environment.getExternalStorageDirectory().toString() + "/Download";
 	public final String PATH_MUSIC = Environment.getExternalStorageDirectory().toString() + "/Music";
+	public final String PATH_ROOT= Environment.getExternalStorageDirectory().toString() + "/"; 
+	public final String PATH_MEM= Environment.getExternalStorageDirectory().toString() + "/Music"; 
 	public SongsManager(){	}
 	
 	/**
 	 * Get list of songs.
 	 * */
 	public ArrayList<HashMap<String, String>> getPlayList(){
-		addSongToList(PATH, this.songsList);
+		addSongToList(PATH_DOWNLOAD, this.songsList);
 		addSongToList(PATH_MUSIC, this.songsList);
+		addSongToList(PATH_ROOT, this.songsList);
 		return songsList;
 	}
 	public void addSongToList(String path,ArrayList<HashMap<String, String>> songsList){

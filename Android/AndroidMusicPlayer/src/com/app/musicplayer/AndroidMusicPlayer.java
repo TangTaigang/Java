@@ -34,7 +34,7 @@ public class AndroidMusicPlayer extends Activity implements OnCompletionListener
 	private TextView songCurrentDurationLabel;
 	private TextView songTotalDurationLabel;
 	// Media Player
-	private  MediaPlayer mp;
+	private  MediaPlayer mp =new MediaPlayer();
 	// Handler to update UI timer, progress bar etc,.
 	private Handler mHandler = new Handler();;
 	private SongsManager songManager;
@@ -46,12 +46,18 @@ public class AndroidMusicPlayer extends Activity implements OnCompletionListener
 	private boolean isRepeat = false;
 	private ArrayList<HashMap<String, String>> songsList = new ArrayList<HashMap<String, String>>();
 	
-
+	@Override
+	public void onDestroy(){
+		if(mp!=null){
+			mp.reset();
+		}
+		finish();
+		System.exit(0);
+	}
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.player);
-		
 		// All player buttons
 		btnPlay     = (ImageButton) findViewById(R.id.btnPlay);
 		btnForward  = (ImageButton) findViewById(R.id.btnForward);
@@ -65,12 +71,10 @@ public class AndroidMusicPlayer extends Activity implements OnCompletionListener
 		songTitleLabel  = (TextView) findViewById(R.id.songTitle);
 		songCurrentDurationLabel = (TextView) findViewById(R.id.songCurrentDurationLabel);
 		songTotalDurationLabel   = (TextView) findViewById(R.id.songTotalDurationLabel);
-		
 		// Mediaplayer
 		mp = new MediaPlayer();
 		songManager = new SongsManager();
 		utils = new Utilities();
-		
 		// Listeners
 		songProgressBar.setOnSeekBarChangeListener(this); // Important
 		mp.setOnCompletionListener(this); // Important
@@ -78,7 +82,7 @@ public class AndroidMusicPlayer extends Activity implements OnCompletionListener
 		// Getting all songs list
 		songsList = songManager.getPlayList();
 		if(!songsList.isEmpty()){
-			playSong(0);
+				playSong(0);	
 		}
 				
 		/**
@@ -391,7 +395,4 @@ public class AndroidMusicPlayer extends Activity implements OnCompletionListener
 			}
 		}
 	}
-	
-	
-	
 }
