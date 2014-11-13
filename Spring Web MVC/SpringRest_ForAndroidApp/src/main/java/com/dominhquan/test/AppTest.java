@@ -9,6 +9,7 @@ import com.dominhquan.model.Account;
 import com.dominhquan.model.Item;
 import com.dominhquan.service.AccountServiceImpl;
 import com.dominhquan.service.ItemServiceImpl;
+import com.dominhquan.service.MailService;
 
 public class AppTest {
 	
@@ -19,7 +20,12 @@ public class AppTest {
 		ApplicationContext context=new ClassPathXmlApplicationContext("servlet-context.xml");
 		AccountServiceImpl accountServiceImpl=(AccountServiceImpl) context.getBean("accountService");
 		ItemServiceImpl itemServiceImpl= (ItemServiceImpl) context.getBean("itemService");
+		MailService mailService=(MailService) context.getBean("mailService");
 		
+		/**
+		 * 
+		 */
+		mailService.sendMail("dominhquan.uit@gmail.com","11520616@gm.uit.edu.vn", "Spring Mail Subject","Spring Mail Data");
 		  /**
 		   * Account
 		   */
@@ -40,6 +46,7 @@ public class AppTest {
 			 */
 		Item item=itemServiceImpl.getItem("food1");
 		item.setStatus(1);
+		item.setCreateDate(new Date());
 		item.setUpdateDate(new Date());
 		itemServiceImpl.updateItem(item);
 //		for(int i=1;i<21;i++){

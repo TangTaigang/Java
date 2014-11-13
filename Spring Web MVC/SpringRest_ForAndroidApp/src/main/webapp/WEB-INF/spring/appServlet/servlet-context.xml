@@ -45,15 +45,34 @@
 	<beans:bean id="accountService" class="com.dominhquan.service.AccountServiceImpl">
 		<beans:constructor-arg name="mongoTemplate" ref="mongoTemplate"/>
 	</beans:bean>
+	<!-- Mongo Template -->
 	<beans:bean id="mongoTemplate" class="org.springframework.data.mongodb.core.MongoTemplate">
 		<beans:constructor-arg  name="mongoDbFactory" ref="mongoDbFactory"/>
 	</beans:bean>
-	
+	<!-- Mongo Config -->
 	<mongo:db-factory host="192.168.1.20" port="27017" dbname="shopStore" />
-	
+	<!-- Crypto For Login-->
 	<beans:bean id="encoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder">  
   		<beans:constructor-arg name="strength" value="10" />  
  	</beans:bean>  
-	
+	<!-- Java Mail Config  -->
+
+	<beans:bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
+		<beans:property name="host" value="smtp.gmail.com" />
+		<beans:property name="port" value="465" />
+		<beans:property name="username" value="11520616@gm.uit.edu.vn" />
+		<beans:property name="password" value="01647477631" />
+		<beans:property name="javaMailProperties">
+		   <beans:props>
+	       	    <beans:prop key="mail.transport.protocol">smtp</beans:prop>
+                <beans:prop key="mail.smtp.auth">true</beans:prop>
+                <beans:prop key="mail.smtp.starttls.enable">true</beans:prop>
+                <beans:prop key="mail.debug">true</beans:prop>
+	       	   </beans:props>
+		</beans:property>
+	</beans:bean>
+	<beans:bean id="mailService" class="com.dominhquan.service.MailService">
+		<beans:property name="mailSender" ref="mailSender" />
+	</beans:bean>
 	
 </beans:beans>
