@@ -17,6 +17,10 @@ public class MailService {
 
 	public void sendMail(String from,String to,String subject,String msg){
 		message = new SimpleMailMessage();
+		message.setFrom(from);
+		message.setTo(to);
+		message.setSubject(subject);
+		message.setText(msg);
 		mailSender.send(message);
 	}
 	

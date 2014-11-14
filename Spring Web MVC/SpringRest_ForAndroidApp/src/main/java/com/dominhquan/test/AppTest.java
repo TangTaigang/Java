@@ -25,7 +25,8 @@ public class AppTest {
 		/**
 		 * 
 		 */
-		mailService.sendMail("dominhquan.uit@gmail.com","11520616@gm.uit.edu.vn", "Spring Mail Subject","Spring Mail Data");
+//		mailService.sendMail("dominhquan.uit@gmail.com","appgame.cotuong@gmail.com", "Spring Mail Subject","Spring Mail Data");
+		mailService.sendMail("appgame.cotuong@gmail.com","dominhquan.uit@gmail.com", "Spring Mail Subject","Spring Mail Data");
 		  /**
 		   * Account
 		   */
