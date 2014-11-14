@@ -43,9 +43,7 @@
 		<div id="page-wrapper">
             <div class="row">
                 <div class="col-lg-12">
-                    <h1 class="page-header">
-                  		List food -  <c:out value="${data.name}"/> restaurant
-                  		</h1>
+                    <h1 class="page-header">List food -  <c:out value="${data.name}"/> restaurant</h1>
                 </div>
                 <!-- /.col-lg-12 -->
             </div>
@@ -74,7 +72,7 @@
         <!-- /#page-wrapper -->
     </div>
     <!-- /#wrapper -->
-
+<input type="hidden" value="<c:out value="${data.name}"/>" id="res_name">
     <!-- jQuery Version 1.11.0 -->
     <script src="resources/js/jquery-1.11.0.js"></script>
     <!-- Bootstrap Core JavaScript -->
@@ -87,6 +85,7 @@
     <!-- Custom Theme JavaScript -->
     <script src="resources/js/sb-admin-2.js"></script>
     <script>
+    var res_name=$("#res_name").val();
     $(document).ready(function() {
     	$.getJSON("http://localhost:8080/app/rest/store/Restaurant",function(result){
             var data = [];
@@ -94,8 +93,11 @@
            		var element = [];
            		console.log(this);
            		for (var property in this) {
-           			console.log(property);
            		    if (this.hasOwnProperty(property)) {
+               			if(property=="createDate" || property=="updateDate"){
+               				var dateTime=new Date(this[property]);
+               				this[property]=dateTime.toString();
+               			}
            		        element.push(this[property]);
            		    }
            		}
@@ -105,35 +107,32 @@
             "data": data,
             "columns": [
                 { "title": "Id" },
-                { "title": "Name                 ","class": "center" },
+                { "title": "Name","class": "center" },
                 { "title": "Restaurant Name" },
                 { "title": "Create Date", "class": "center" },
                 { "title": "Update Date", "class": "center" },
                 { "title": "Price", "class": "center" },
                 { "title": "Status", "class": "center" },
+            ],
+            "columnDefs":[
+                {"targets":[0],"visible":false,"searchable":false}
             ]
         });
  	    var add=$('#dataTables-example').DataTable();
  	    $('#dataTables-example tbody').on('click','tr',function(){
  	    	alert(add.row(this).data());
  	    });
-        for (var i = 0; i < 8; i++) {
-			add.row.add([
-			          'a',
-			          'b',
-			          'c',
-			          'd',
-			          'e',
-			          'g',
-			          'h'
-			]).draw();
-		}
-//        $.getJSON("http://localhost:6515/app/rest/store/Restaurant",function(result){
-//        	var data = [];
-//        	for(var i in result){
-//        	    data.push([i,result[i]]);
-//        	}
-//          });
+//        for (var i = 0; i < 8; i++) {
+//			add.row.add([
+//			          'a',
+//			          'b',
+//			          'c',
+//			          'd',
+//			          'e',
+//			          'g',
+//			          'h'
+//			]).draw();
+//		}
       
         $('#dataTables-example tbody').on('click', 'tr', function () {
             var id = this.id;

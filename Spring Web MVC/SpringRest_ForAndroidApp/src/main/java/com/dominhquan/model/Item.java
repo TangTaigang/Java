@@ -14,12 +14,12 @@ public class Item {
 	private String id;
 	private String name;
 	private String restaurant_name;
-	private String img_url;
-	private String img_ico;
 	private Date createDate;
 	private Date updateDate;
 	private Double price;
 	private int status;
+	private String img_url;
+	private String img_ico;
 	
 	public String getId() {
 		return id;
