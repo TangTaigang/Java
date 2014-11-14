@@ -18,6 +18,7 @@ import com.dominhquan.model.Account;
 import com.dominhquan.model.Item;
 import com.dominhquan.service.AccountService;
 import com.dominhquan.service.ItemService;
+import com.dominhquan.service.MailService;
 import com.dominhquan.uri.AppRestUri;
 
 
@@ -33,6 +34,8 @@ public class RestController {
 	@Autowired
 	AccountService accountService;
 	
+	@Autowired
+	private MailService mailService;
 	private static final Logger logger = LoggerFactory.getLogger(RestController.class);
 
 	
@@ -70,6 +73,7 @@ public class RestController {
 			account.setEmail("fail");
 		}else{
 			accountService.add(account);
+			mailService.sendMail("appgame.cotuong@gmail.com",account.getEmail(), "Spring Mail Subject","https://www.facebook.com/");
 		}
 		account.setPassword("");
 		return account;

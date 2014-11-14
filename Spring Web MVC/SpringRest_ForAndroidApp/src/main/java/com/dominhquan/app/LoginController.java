@@ -15,6 +15,7 @@ import org.springframework.web.bind.support.SessionStatus;
 
 import com.dominhquan.model.Account;
 import com.dominhquan.service.AccountService;
+import com.dominhquan.service.MailService;
 
 @Controller
 public class LoginController {
@@ -24,6 +25,9 @@ public class LoginController {
 	
 	@Autowired
 	PasswordEncoder passwordEncoder;
+	
+	@Autowired
+	private MailService mailService;
 	
 	@RequestMapping(value = {"/*","/login*"}, method = RequestMethod.GET)
 	public String home(Model model,HttpSession httpSession) {

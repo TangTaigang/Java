@@ -18,7 +18,6 @@ public class ServiceController {
 	public String listOrder(Model model,HttpSession httpSession){
 		if(validateSession(httpSession)){
 			Account account=(Account) httpSession.getAttribute("account");
-			System.out.println(account.getName());
 			model.addAttribute("data",account);
 			return "tables";
 		}
