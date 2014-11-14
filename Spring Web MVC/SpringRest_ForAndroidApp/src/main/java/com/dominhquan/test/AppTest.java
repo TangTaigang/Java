@@ -26,7 +26,7 @@ public class AppTest {
 		 * 
 		 */
 //		mailService.sendMail("dominhquan.uit@gmail.com","appgame.cotuong@gmail.com", "Spring Mail Subject","Spring Mail Data");
-		mailService.sendMail("appgame.cotuong@gmail.com","dominhquan.uit@gmail.com", "Spring Mail Subject","Spring Mail Data");
+//		mailService.sendMail("appgame.cotuong@gmail.com","dominhquan.uit@gmail.com", "Spring Mail Subject","Spring Mail Data");
 		  /**
 		   * Account
 		   */
@@ -34,7 +34,8 @@ public class AppTest {
 		account.setEmail("dominhquan.uit@gmail.com");
 		account.setName("Đỗ Minh Quân");
 		account.setPassword("123456");
-		accountServiceImpl.add(account);
+//		accountServiceImpl.add(account);
+		mailService.sendActivationEmail(account, "appgame.cotuong@gmail.com");
 //		
 //		account=accountServiceImpl.getAccount("dominhquan.uit@gmail.com");
 //		if(account!=null){
